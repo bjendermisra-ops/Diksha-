@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>हरिनाम दीक्षा — ADMIN PANEL</title>
+
+  <!-- Tailwind CSS CDN with Custom Color Palette -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bgnavy: '#07151D',
+            bgsecondary: '#0D2028',
+            carddark: '#13252C',
+            cardelevated: '#182D35',
+            goldlux: '#D6A94A',
+            goldbright: '#F0C866',
+            goldsoft: '#E8C979',
+            creampri: '#F6EEDB',
+            creamsec: '#E8DCC4',
+            creamdark: '#241B0E',
+            textpri: '#FFF8E8',
+            textsec: '#D7CDB9',
+            textmuted: '#9D988C',
+            success: '#43B982',
+            danger: '#E35D63',
+            ytred: '#FF2028'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Noto Sans Devanagari & Rozha One -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Rozha+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <style>
+    body {
+      font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
+      background-color: #07151D;
+      color: #FFF8E8;
+    }
+    .font-serif-sacred {
+      font-family: 'Rozha One', serif;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #07151D;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D6A94A;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="selection:bg-amber-900 selection:text-white antialiased min-h-screen flex flex-col">
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="admin-toast" class="hidden fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-[#13252C] border border-[#D6A94A] text-[#FFF8E8] px-5 py-2.5 rounded-full shadow-2xl text-xs font-semibold flex items-center gap-2">
+    <span>🪷</span> <span id="toast-text">सफलतापूर्वक पूर्ण</span>
+  </div>
+
+  <!-- AUTH LOGIN MODAL -->
+  <div id="login-modal" class="fixed inset-0 z-50 bg-[#07151D] flex items-center justify-center p-4">
+    <div class="w-full max-w-sm p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#13252C] to-[#0D2028] border border-[#D6A94A]/40 shadow-2xl text-center space-y-6">
+      <div class="space-y-1">
+        <span class="text-4xl block mb-2">🪷</span>
+        <h1 class="text-2xl font-serif-sacred font-bold text-[#F0C866]">हरिनाम दीक्षा</h1>
+        <p class="text-[11px] text-[#D6A94A] font-mono tracking-widest uppercase">ADMIN PANEL</p>
+      </div>
+
+      <div id="login-error" class="hidden p-3 rounded-xl bg-red-950/60 border border-red-500/40 text-red-200 text-xs text-left">
+        ईमेल या पासवर्ड सही नहीं है।
+      </div>
+
+      <form onsubmit="handleRealFirebaseLogin(event)" class="space-y-4 text-left">
+        <div>
+          <label class="text-[11px] text-[#D7CDB9] block mb-1">व्यवस्थापक ईमेल</label>
+          <input id="login-email" type="email" placeholder="admin@example.com" required class="w-full bg-[#07151D] border border-[#D6A94A]/30 rounded-xl px-3.5 py-3 text-xs text-[#FFF8E8] placeholder:text-neutral-500 focus:outline-none focus:border-[#D6A94A]">
+        </div>
+        <div>
+          <label class="text-[11px] text-[#D7CDB9] block mb-1">पासवर्ड</label>
+          <input id="login-password" type="password" placeholder="••••••••" required class="w-full bg-[#07151D] border border-[#D6A94A]/30 rounded-xl px-3.5 py-3 text-xs text-[#FFF8E8] placeholder:text-neutral-500 focus:outline-none focus:border-[#D6A94A]">
+        </div>
+        <button id="login-submit-btn" type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-[#D6A94A] via-[#F0C866] to-[#D6A94A] text-[#07151D] font-bold text-xs shadow-lg hover:brightness-110 active:scale-[0.98] transition-all">
+          प्रवेश करें →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN APP -->
+  <div class="flex-1 flex min-h-screen">
+
+    <!-- 1. LEFT SIDEBAR MATCHING REFERENCE -->
+    <aside id="sidebar-drawer" class="fixed inset-y-0 left-0 z-40 w-[260px] bg-[#0D2028] border-r border-[#D6A94A]/25 flex flex-col justify-between transition-transform duration-300 -translate-x-full lg:translate-x-0 lg:static">
+      <div class="p-4 space-y-4">
+        <!-- Brand Logo Header -->
+        <div class="flex items-center justify-between border-b border-[#D6A94A]/20 pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="text-2xl">🪷</span>
+            <div>
+              <h2 class="text-sm font-serif-sacred font-bold text-[#F6EEDB] leading-tight">हरिनाम दीक्षा</h2>
+              <span class="text-[9px] text-[#D6A94A] tracking-widest block font-mono">ADMIN PANEL</span>
+            </div>
+          </div>
+          <button onclick="toggleMobileSidebar()" class="lg:hidden text-[#D6A94A] p-1">✕</button>
+        </div>
+
+        <!-- Navigation Items -->
+        <nav class="space-y-1 text-xs font-medium">
+          <button onclick="scrollToTop()" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#D6A94A]/20 to-transparent border-l-4 border-[#D6A94A] text-[#F6EEDB] font-semibold text-left">
+            <span class="text-base text-[#D6A94A]">🏠</span> <span>Dashboard</span>
+          </button>
+          <button onclick="scrollToSection('participants-sec')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#D7CDB9] hover:bg-[#13252C] hover:text-[#FFF8E8] transition-colors text-left">
+            <span>👥</span> <span>दीक्षार्थी सूची</span>
+          </button>
+          <button onclick="openCsvModal()" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#D7CDB9] hover:bg-[#13252C] hover:text-[#FFF8E8] transition-colors text-left">
+            <span>📥</span> <span>CSV Import</span>
+          </button>
+          <button onclick="openBatchWhatsAppModal(10)" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 font-semibold text-left">
+            <span>💬</span> <span>शेयर / बैच प्रेषण</span>
+          </button>
+          <button onclick="scrollToSection('analytics-sec')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#D7CDB9] hover:bg-[#13252C] hover:text-[#FFF8E8] transition-colors text-left">
+            <span>📈</span> <span>Analytics</span>
+          </button>
+          <button onclick="openContentModal()" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#D7CDB9] hover:bg-[#13252C] hover:text-[#FFF8E8] transition-colors text-left">
+            <span>📝</span> <span>Content Management</span>
+          </button>
+          <button onclick="openEventModeModal()" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#D7CDB9] hover:bg-[#13252C] hover:text-[#FFF8E8] transition-colors text-left">
+            <span>⚙️</span> <span>Event Settings</span>
+          </button>
+          <button onclick="handleRealFirebaseLogout()" class="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-red-400 hover:bg-red-950/40 transition-colors text-left pt-2 border-t border-[#D6A94A]/10">
+            <span>🚪</span> <span>Logout</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Devotional Sidebar Footer with Temple Artwork -->
+      <div class="p-3 text-center border-t border-[#D6A94A]/20 bg-gradient-to-t from-black to-transparent">
+        <div class="w-full h-16 rounded-xl overflow-hidden mb-2 relative opacity-70">
+          <img src="/logo.png" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=400'" alt="Temple" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0D2028] via-transparent to-transparent"></div>
+        </div>
+        <p class="text-xs font-serif-sacred text-[#F0C866]">🪷 हरे कृष्ण 🪷</p>
+        <p class="text-[9px] text-[#9D988C]">सेवा ही जीवन है</p>
+      </div>
+    </aside>
+
+    <!-- 2. MAIN CONTENT AREA -->
+    <div class="flex-1 flex flex-col min-w-0">
+
+      <!-- Mobile Top Bar -->
+      <header class="lg:hidden h-14 bg-[#0D2028] border-b border-[#D6A94A]/25 px-4 flex items-center justify-between sticky top-0 z-30">
+        <button onclick="toggleMobileSidebar()" class="p-1.5 rounded-lg bg-[#13252C] border border-[#D6A94A]/30 text-[#FFF8E8] text-sm">☰</button>
+        <div class="text-center">
+          <h2 class="text-xs font-serif-sacred font-bold text-[#F6EEDB]">हरिनाम दीक्षा</h2>
+          <span class="text-[9px] text-[#D6A94A] font-mono">ADMIN PANEL</span>
+        </div>
+        <a href="/" target="_blank" class="text-xs text-[#D6A94A] border border-[#D6A94A]/40 px-2 py-0.5 rounded-lg">Live Site ↗</a>
+      </header>
+
+      <main class="p-3 sm:p-6 space-y-6 max-w-[1600px] mx-auto w-full flex-1">
+
+        <!-- TOP CINEMATIC BANNER -->
+        <div class="rounded-3xl overflow-hidden border border-[#D6A94A]/35 bg-gradient-to-r from-[#0D2028] via-[#13252C] to-[#0D2028] p-4 sm:p-6 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4 relative">
+          <div class="space-y-1.5 text-left z-10">
+            <div class="flex items-center gap-1.5 text-xs text-[#F0C866] font-semibold">
+              <span>👑</span> <span>स्वागत है, Admin जी</span>
+            </div>
+            <h2 id="banner-event-title" class="text-lg sm:text-2xl font-serif-sacred font-bold text-[#FFF8E8]">
+              श्री हरिनाम दीक्षा समारोह
+            </h2>
+            <p id="banner-event-date" class="text-xs text-[#D7CDB9]">
+              03 अक्टूबर 2026 | पुणे
+            </p>
+            <p class="text-xs text-[#E8C979] font-serif-sacred flex items-center gap-1.5 pt-1">
+              <span>🪷</span> भक्ति से जुड़ें, जीवन संवरें
+            </p>
+          </div>
+
+          <div class="flex items-center gap-3 z-10 flex-wrap justify-end">
+            <button onclick="openBatchWhatsAppModal(10)" class="py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#43B982] to-emerald-600 hover:brightness-110 text-white font-semibold text-xs flex items-center gap-1.5 shadow-lg">
+              <span>💬</span> <span>10 WhatsApp शेयर</span>
+            </button>
+            <button onclick="openBatchWhatsAppModal(20)" class="py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:brightness-110 text-white font-semibold text-xs flex items-center gap-1.5 shadow-lg">
+              <span>💬</span> <span>20 WhatsApp शेयर</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 KPI CARDS -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div class="p-3.5 rounded-2xl bg-[#13252C] border border-[#D6A94A]/25 space-y-1 text-left shadow">
+            <span class="text-xl">👥</span>
+            <div class="text-[11px] text-[#D7CDB9]">कुल दीक्षार्थी</div>
+            <div id="stat-total" class="text-2xl font-bold font-mono text-[#F0C866]">0</div>
+            <div class="text-[9px] text-[#43B982] font-mono">↑ 12% <span class="text-[#9D988C]">पिछले 30 दिन से</span></div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-[#13252C] border border-[#D6A94A]/25 space-y-1 text-left shadow">
+            <span class="text-xl">👁️</span>
+            <div class="text-[11px] text-[#D7CDB9]">निमंत्रण खोले गए</div>
+            <div id="stat-opens" class="text-2xl font-bold font-mono text-[#F0C866]">0</div>
+            <div class="text-[9px] text-[#43B982] font-mono">↑ 18% <span class="text-[#9D988C]">पिछले 30 दिन से</span></div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-[#13252C] border border-[#D6A94A]/25 space-y-1 text-left shadow">
+            <span class="text-xl">↗️</span>
+            <div class="text-[11px] text-[#D7CDB9]">कुल शेयर</div>
+            <div id="stat-shares" class="text-2xl font-bold font-mono text-[#F0C866]">0</div>
+            <div class="text-[9px] text-[#43B982] font-mono">↑ 22% <span class="text-[#9D988C]">पिछले 30 दिन से</span></div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-[#13252C] border border-[#D6A94A]/25 space-y-1 text-left shadow">
+            <span class="text-xl text-red-500">▶️</span>
+            <div class="text-[11px] text-[#D7CDB9]">YouTube क्लिक</div>
+            <div id="stat-yt" class="text-2xl font-bold font-mono text-[#F0C866]">0</div>
+            <div class="text-[9px] text-[#43B982] font-mono">↑ 15% <span class="text-[#9D988C]">पिछले 30 दिन से</span></div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-[#13252C] border border-[#D6A94A]/25 space-y-1 text-left shadow">
+            <span class="text-xl">📍</span>
+            <div class="text-[11px] text-[#D7CDB9]">Map क्लिक</div>
+            <div id="stat-map" class="text-2xl font-bold font-mono text-[#F0C866]">0</div>
+            <div class="text-[9px] text-[#43B982] font-mono">↑ 17% <span class="text-[#9D988C]">पिछले 30 दिन से</span></div>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-[#13252C] border border-[#D6A94A]/25 space-y-1 text-left shadow">
+            <span class="text-xl">📅</span>
+            <div class="text-[11px] text-[#D7CDB9]">Calendar जोड़ें</div>
+            <div id="stat-cal" class="text-2xl font-bold font-mono text-[#F0C866]">0</div>
+            <div class="text-[9px] text-[#43B982] font-mono">↑ 13% <span class="text-[#9D988C]">पिछले 30 दिन से</span></div>
+          </div>
+        </div>
+
+        <!-- MAIN TWO-COLUMN CONTENT GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          
+          <!-- LEFT CONTENT: CREAM CARD DISCIPLES LIST -->
+          <div id="participants-sec" class="lg:col-span-8 rounded-3xl bg-[#F6EEDB] text-[#241B0E] p-5 sm:p-6 border border-[#E8DCC4] shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8DCC4] pb-3 flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-base text-[#D6A94A]">👥</span>
+                <h3 class="text-base font-serif-sacred font-bold text-[#241B0E]">हाल के दीक्षार्थी</h3>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="openCsvModal()" class="text-xs bg-white border border-[#D6A94A] text-stone-800 font-semibold px-2.5 py-1.5 rounded-xl hover:bg-amber-100 flex items-center gap-1 shadow-sm">
+                  <span>📥</span> CSV Import
+                </button>
+                <button onclick="openAddParticipantModal()" class="text-xs bg-[#D6A94A] text-[#07151D] font-bold px-3 py-1.5 rounded-xl hover:brightness-110 flex items-center gap-1 shadow-sm">
+                  <span>➕</span> नया दीक्षार्थी
+                </button>
+              </div>
+            </div>
+
+            <!-- Search & Filters -->
+            <div class="flex gap-2 flex-wrap">
+              <input id="search-input" oninput="filterDevoteesList()" type="text" placeholder="नाम या फोन नंबर से खोजें..." class="flex-1 bg-white border border-[#E8DCC4] rounded-xl px-3 py-1.5 text-xs text-[#241B0E] focus:outline-none focus:border-[#D6A94A]">
+              <select id="status-filter" onchange="filterDevoteesList()" class="bg-white border border-[#E8DCC4] rounded-xl px-2.5 py-1.5 text-xs text-[#241B0E] focus:outline-none">
+                <option value="ALL">सभी दीक्षार्थी</option>
+                <option value="ACTIVE">सक्रिय</option>
+                <option value="INACTIVE">निष्क्रिय</option>
+              </select>
+            </div>
+
+            <!-- List Body -->
+            <div class="space-y-2 max-h-[440px] overflow-y-auto pr-1" id="participants-table-body">
+              <div class="text-center py-10 text-xs text-stone-500 font-sans">डेटा लोड हो रहा है...</div>
+            </div>
+          </div>
+
+          <!-- RIGHT UTILITY COLUMN -->
+          <div class="lg:col-span-4 space-y-4">
+            
+            <!-- Event Status Card -->
+            <div class="p-4 rounded-3xl bg-[#13252C] border border-[#D6A94A]/30 text-left space-y-3 shadow-xl">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5 text-xs text-[#FFF8E8]">
+                  <span>🏛️</span> <span class="font-serif-sacred font-bold">Event Status</span>
+                </div>
+                <span id="badge-mode" class="px-2 py-0.5 rounded-full text-[9px] font-mono bg-amber-950/70 border border-amber-500/40 text-[#F0C866]">
+                  PRE-EVENT
+                </span>
+              </div>
+              <p class="text-xs text-[#D7CDB9]">दीक्षा समारोह की तैयारी चल रही है</p>
+
+              <!-- 4 Countdown Blocks -->
+              <div class="grid grid-cols-4 gap-1.5 text-center">
+                <div class="bg-[#07151D] border border-[#D6A94A]/20 rounded-xl p-2">
+                  <div id="adm-cd-days" class="text-base font-bold font-mono text-[#F0C866]">05</div>
+                  <div class="text-[8px] text-[#D7CDB9]">दिन</div>
+                </div>
+                <div class="bg-[#07151D] border border-[#D6A94A]/20 rounded-xl p-2">
+                  <div id="adm-cd-hours" class="text-base font-bold font-mono text-[#F0C866]">14</div>
+                  <div class="text-[8px] text-[#D7CDB9]">घंटे</div>
+                </div>
+                <div class="bg-[#07151D] border border-[#D6A94A]/20 rounded-xl p-2">
+                  <div id="adm-cd-minutes" class="text-base font-bold font-mono text-[#F0C866]">32</div>
+                  <div class="text-[8px] text-[#D7CDB9]">मिनट</div>
+                </div>
+                <div class="bg-[#07151D] border border-[#D6A94A]/20 rounded-xl p-2">
+                  <div id="adm-cd-seconds" class="text-base font-bold font-mono text-[#F0C866]">18</div>
+                  <div class="text-[8px] text-[#D7CDB9]">सेकंड</div>
+                </div>
+              </div>
+              <div class="text-[10px] text-[#9D988C] border-t border-[#D6A94A]/20 pt-2 font-mono">
+                📅 03 अक्टूबर 2026 | शनिवार | पुणे
+              </div>
+            </div>
+
+            <!-- Quick Actions Card -->
+            <div class="p-4 rounded-3xl bg-[#13252C] border border-[#D6A94A]/30 text-left space-y-2.5 shadow-xl">
+              <div class="text-xs font-serif-sacred font-bold text-[#F0C866]">✨ त्वरित कार्य</div>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <button onclick="openAddParticipantModal()" class="p-2.5 rounded-xl bg-[#182D35] border border-[#D6A94A]/30 hover:border-[#D6A94A] text-[#FFF8E8] flex items-center gap-1.5 text-left">
+                  <span>➕</span> <span>नया दीक्षार्थी</span>
+                </button>
+                <button onclick="openCsvModal()" class="p-2.5 rounded-xl bg-[#182D35] border border-[#D6A94A]/30 hover:border-[#D6A94A] text-[#FFF8E8] flex items-center gap-1.5 text-left">
+                  <span>📥</span> <span>CSV Import</span>
+                </button>
+                <button onclick="copyPublicSiteLink()" class="p-2.5 rounded-xl bg-[#182D35] border border-[#D6A94A]/30 hover:border-[#D6A94A] text-[#FFF8E8] flex items-center gap-1.5 text-left">
+                  <span>🔗</span> <span>वेबसाइट लिंक</span>
+                </button>
+                <button onclick="openContentModal()" class="p-2.5 rounded-xl bg-[#182D35] border border-[#D6A94A]/30 hover:border-[#D6A94A] text-[#FFF8E8] flex items-center gap-1.5 text-left">
+                  <span>📝</span> <span>कंटेंट प्रबंधन</span>
+                </button>
+                <button onclick="window.open('https://youtu.be/6Zh9HzBA9jo', '_blank')" class="p-2.5 rounded-xl bg-[#182D35] border border-[#D6A94A]/30 hover:border-[#D6A94A] text-[#FFF8E8] flex items-center gap-1.5 text-left">
+                  <span>▶️</span> <span>YouTube</span>
+                </button>
+                <button onclick="openEventModeModal()" class="p-2.5 rounded-xl bg-[#182D35] border border-[#D6A94A]/30 hover:border-[#D6A94A] text-[#FFF8E8] flex items-center gap-1.5 text-left">
+                  <span>👑</span> <span>Event Mode</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- YouTube Bhakti Promotion Card -->
+            <div class="p-3.5 rounded-2xl bg-[#13252C] border border-[#D6A94A]/30 text-center space-y-2">
+              <div class="h-24 rounded-xl overflow-hidden relative">
+                <img src="https://img.youtube.com/vi/6Zh9HzBA9jo/hqdefault.jpg" alt="YouTube" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                  <span class="text-2xl text-red-500">▶</span>
+                </div>
+              </div>
+              <p class="text-[11px] text-[#FFF8E8] font-medium">भक्ति की यात्रा को आगे बढ़ाएँ — हमारे YouTube चैनल से जुड़ें</p>
+              <a href="https://youtu.be/6Zh9HzBA9jo" target="_blank" class="block w-full py-2 rounded-xl bg-[#FF2028] hover:bg-red-700 text-white text-xs font-semibold">
+                ▶ YouTube पर जाएँ
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- BOTTOM ANALYTICS ROW -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Donut Analytics -->
+          <div class="rounded-3xl bg-[#F6EEDB] text-[#241B0E] p-5 border border-[#E8DCC4] shadow-xl space-y-3">
+            <h3 class="text-sm font-serif-sacred font-bold flex items-center gap-1.5">
+              <span>📊</span> <span>निमंत्रण और शेयरिंग विश्लेषण</span>
+            </h3>
+            <div class="flex items-center gap-4">
+              <div class="relative w-28 h-28 flex items-center justify-center flex-shrink-0">
+                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                  <path class="text-amber-200/50" stroke-width="4.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path id="donut-segment" class="text-blue-600" stroke-width="4.5" stroke-dasharray="0, 100" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                </svg>
+                <div class="absolute text-center">
+                  <div id="donut-center-total" class="text-base font-bold font-mono">0</div>
+                  <div class="text-[8px] text-stone-600 uppercase">कुल निमंत्रण</div>
+                </div>
+              </div>
+              <div class="text-[11px] space-y-1 w-full font-sans">
+                <div class="flex justify-between"><span class="text-blue-700">● खोले हुए</span> <span id="donut-stat-opened" class="font-mono font-bold">0 (0%)</span></div>
+                <div class="flex justify-between"><span class="text-amber-700">● नहीं खुले</span> <span id="donut-stat-unopened" class="font-mono font-bold">0 (0%)</span></div>
+                <div class="flex justify-between"><span class="text-emerald-700">● शेयर किए गए</span> <span id="donut-stat-shared" class="font-mono font-bold">0</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Performing Video -->
+          <div class="rounded-3xl bg-[#F6EEDB] text-[#241B0E] p-5 border border-[#E8DCC4] shadow-xl space-y-3">
+            <h3 class="text-sm font-serif-sacred font-bold flex items-center gap-1.5 border-b border-[#E8DCC4] pb-2">
+              <span>🌟</span> <span>शीर्ष प्रदर्शन करने वाले</span>
+            </h3>
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E8DCC4]">
+              <div class="flex items-center gap-2">
+                <span class="font-bold font-mono text-stone-400">1</span>
+                <img src="https://img.youtube.com/vi/6Zh9HzBA9jo/default.jpg" class="w-8 h-8 rounded object-cover">
+                <div>
+                  <div class="font-semibold text-[11px]">राधे राधे भजन (Official)</div>
+                  <div class="text-[9px] text-stone-500 font-mono">12.5K views</div>
+                </div>
+              </div>
+              <a href="https://youtu.be/6Zh9HzBA9jo" target="_blank" class="text-stone-400 hover:text-black">›</a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="rounded-3xl bg-[#F6EEDB] text-[#241B0E] p-5 border border-[#E8DCC4] shadow-xl space-y-3">
+            <h3 class="text-sm font-serif-sacred font-bold flex items-center gap-1.5 border-b border-[#E8DCC4] pb-2">
+              <span>🔗</span> <span>द्रुत लिंक</span>
+            </h3>
+            <div class="space-y-2 text-xs">
+              <div class="flex items-center justify-between p-2 rounded-xl bg-white border border-[#E8DCC4]">
+                <div>
+                  <div class="font-semibold text-[11px]">वेबसाइट (public)</div>
+                  <div class="text-[9px] text-stone-500 font-mono">/index.html</div>
+                </div>
+                <button onclick="copyPublicSiteLink()" class="px-2 py-1 rounded bg-stone-100 text-[10px] border hover:bg-stone-200">🔗 कॉपी</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="pt-6 border-t border-[#D6A94A]/20 text-center space-y-2 text-xs text-[#9D988C] pb-8">
+          <div class="flex items-center justify-between flex-wrap gap-2 text-[11px]">
+            <div class="flex items-center gap-1 text-[#D7CDB9]">
+              <span>🪷</span> श्री हरिनाम दीक्षा समारोह | 03 अक्टूबर 2026 | पुणे
+            </div>
+            <div class="text-[10px] text-[#D6A94A] font-serif-sacred">
+              सर्व अधिकार सुरक्षित | हरि बोल | © 2026
+            </div>
+          </div>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ============================================================================
+      MODALS: SHARE DEVOTEE (PHOTO + TEXT) | BATCH QUEUE | CSV | ADD
+      ============================================================================ -->
+
+  <!-- DIRECT SHARE MODAL FOR A SINGLE USER -->
+  <div id="modal-single-share" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-3xl bg-[#13252C] border-2 border-[#D6A94A] p-6 space-y-4 shadow-2xl text-left">
+      <div class="flex items-center justify-between border-b border-[#D6A94A]/20 pb-3">
+        <h4 class="text-sm font-serif-sacred font-bold text-[#F0C866] flex items-center gap-1.5">
+          <span>📤</span> <span>व्यक्तिगत निमंत्रण शेयर करें</span>
+        </h4>
+        <button onclick="closeModal('modal-single-share')" class="text-[#D6A94A]">✕</button>
+      </div>
+
+      <div class="space-y-1">
+        <div class="text-xs text-[#D7CDB9]">भक्त का नाम: <strong id="share-modal-name" class="text-[#FFF8E8] text-sm"></strong></div>
+        <div class="text-xs text-[#D7CDB9]">मोबाइल नंबर: <span id="share-modal-phone" class="font-mono text-[#F0C866]"></span></div>
+      </div>
+
+      <div class="p-3 rounded-xl bg-[#07151D] border border-[#D6A94A]/25 space-y-1 text-xs">
+        <div class="text-[10px] text-[#9D988C]">मैसेज प्रीव्यू:</div>
+        <div id="share-modal-preview" class="text-[#FFF8E8] font-sans leading-relaxed whitespace-pre-line text-[11px] max-h-32 overflow-y-auto"></div>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <button id="btn-share-photo-text" onclick="executeNativePhotoAndTextShare()" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-[#43B982] hover:brightness-110 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2">
+          <span>🖼️ + 💬</span> फोटो कार्ड + मैसेज WhatsApp पर शेयर करें
+        </button>
+        <button onclick="downloadActiveShareCard()" class="w-full py-2.5 rounded-xl bg-[#182D35] border border-[#D6A94A]/40 text-[#FFF8E8] font-semibold text-xs flex items-center justify-center gap-1.5 hover:bg-[#1f3a44]">
+          <span>⬇️</span> सिर्फ फोटो कार्ड डाउनलोड करें
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BATCH WHATSAPP QUEUE MODAL -->
+  <div id="modal-batch-wa" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="w-full max-w-md rounded-3xl bg-[#13252C] border-2 border-emerald-500/60 p-6 space-y-4 shadow-2xl text-left">
+      <div class="flex items-center justify-between border-b border-[#D6A94A]/20 pb-3">
+        <div class="flex items-center gap-2 text-emerald-400">
+          <span class="text-xl">💬</span>
+          <h4 class="text-sm font-serif-sacred font-bold text-[#F6EEDB]">सुरक्षित WhatsApp प्रेषण कतार</h4>
+        </div>
+        <button onclick="closeModal('modal-batch-wa')" class="text-[#D6A94A]">✕</button>
+      </div>
+
+      <div class="bg-[#07151D] p-3 rounded-xl border border-[#D6A94A]/20 space-y-1">
+        <div class="flex justify-between text-xs text-[#D7CDB9]">
+          <span>कतार प्रगति:</span>
+          <span id="wa-queue-progress" class="font-mono text-emerald-400 font-bold">1 / 10</span>
+        </div>
+        <div class="w-full h-1.5 bg-stone-800 rounded-full overflow-hidden">
+          <div id="wa-progress-bar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 10%"></div>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-[#07151D] border border-[#D6A94A]/30 space-y-2 text-xs">
+        <div class="text-[10px] text-[#9D988C] uppercase tracking-widest font-mono">वर्तमान भक्त</div>
+        <div class="flex items-center justify-between">
+          <div id="queue-devotee-name" class="text-base font-bold text-[#F0C866]">भक्त</div>
+          <div id="queue-devotee-phone" class="font-mono text-emerald-400 text-xs">98XXXXXXXX</div>
+        </div>
+        <div id="queue-preview-msg" class="p-2.5 rounded-lg bg-black/40 border border-stone-800 text-[11px] text-[#D7CDB9] font-sans max-h-24 overflow-y-auto whitespace-pre-line"></div>
+      </div>
+
+      <div class="space-y-2 pt-1">
+        <button id="queue-download-img-btn" onclick="downloadCurrentQueueDevoteeCard()" class="w-full py-2.5 rounded-xl bg-[#182D35] border border-[#D6A94A]/40 text-[#FFF8E8] font-semibold text-xs flex items-center justify-center gap-1.5 hover:bg-[#1f3a44]">
+          <span>🖼️</span> इस भक्त का फोटो कार्ड डाउनलोड करें
+        </button>
+        <button id="queue-send-btn" onclick="sendCurrentAndAdvanceQueue()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2">
+          <span>💬</span> WhatsApp खोलें और अगला बढ़ाएँ →
+        </button>
+        <button onclick="skipQueueItem()" class="w-full py-2 rounded-xl bg-transparent border border-[#D6A94A]/20 text-[#D7CDB9] text-xs">
+          इस भक्त को छोड़ें (Skip)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CSV IMPORT MODAL -->
+  <div id="modal-csv-import" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-md rounded-3xl bg-[#13252C] border border-[#D6A94A] p-6 space-y-4 shadow-2xl text-left">
+      <div class="flex items-center justify-between border-b border-[#D6A94A]/20 pb-3">
+        <h4 class="text-sm font-serif-sacred font-bold text-[#F0C866]">📥 CSV फ़ाइल अपलोड</h4>
+        <button onclick="closeModal('modal-csv-import')" class="text-[#D6A94A]">✕</button>
+      </div>
+      <input type="file" id="real-csv-file" accept=".csv, text/csv" onchange="handleCsvFileSelected(event)" class="block w-full text-xs text-[#D7CDB9] file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#D6A94A] file:text-[#07151D] cursor-pointer">
+      <div id="csv-preview-box" class="hidden p-3 rounded-xl bg-[#07151D] border border-[#D6A94A]/20 text-xs">
+        कुल: <strong id="csv-count-total">0</strong> | वैध: <strong id="csv-count-valid" class="text-emerald-400">0</strong>
+      </div>
+      <div class="flex gap-2 pt-2">
+        <button type="button" onclick="closeModal('modal-csv-import')" class="flex-1 py-2 rounded-xl bg-black/40 border border-[#D6A94A]/20 text-[#D7CDB9] text-xs">रद्द करें</button>
+        <button type="button" id="btn-confirm-csv" disabled onclick="handleBatchImportToFirestore()" class="flex-1 py-2 rounded-xl bg-[#D6A94A] disabled:opacity-40 text-[#07151D] font-bold text-xs">इम्पोर्ट करें →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD DEVOTEE MODAL -->
+  <div id="modal-add-devotee" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-sm rounded-3xl bg-[#13252C] border border-[#D6A94A] p-6 space-y-4 shadow-2xl text-left">
+      <div class="flex items-center justify-between border-b border-[#D6A94A]/20 pb-3">
+        <h4 class="text-sm font-serif-sacred font-bold text-[#F0C866]">➕ नया दीक्षार्थी जोड़ें</h4>
+        <button onclick="closeModal('modal-add-devotee')" class="text-[#D6A94A]">✕</button>
+      </div>
+      <form onsubmit="handleSaveNewParticipant(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="text-[#D7CDB9] block mb-1">पूरा नाम *</label>
+          <input id="input-devotee-name" type="text" required placeholder="उदा. संकेत नागपुरे" class="w-full bg-[#07151D] border border-[#D6A94A]/30 rounded-xl p-2.5 text-[#FFF8E8]">
+        </div>
+        <div>
+          <label class="text-[#D7CDB9] block mb-1">मोबाइल नंबर *</label>
+          <input id="input-devotee-phone" type="tel" required placeholder="98XXXXXXXX" class="w-full bg-[#07151D] border border-[#D6A94A]/30 rounded-xl p-2.5 text-[#FFF8E8]">
+        </div>
+        <div>
+          <label class="text-[#D7CDB9] block mb-1">बेल्ट नंबर</label>
+          <input id="input-devotee-belt" type="text" placeholder="उदा. A-12" class="w-full bg-[#07151D] border border-[#D6A94A]/30 rounded-xl p-2.5 text-[#FFF8E8]">
+        </div>
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-[#D6A94A] text-[#07151D] font-bold text-xs shadow">सहेजें ✓</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyASMDZyfcAjg5Nb1GAwQqkufvAdqZfy2us",
+      authDomain: "diksha-invitation.firebaseapp.com",
+      projectId: "diksha-invitation",
+      storageBucket: "diksha-invitation.firebasestorage.app",
+      messagingSenderId: "720673907233",
+      appId: "1:720673907233:web:6a3e5a0fd49012e1177960",
+      measurementId: "G-WWSJ2RED5B"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+
+    let liveParticipants = [];
+    let parsedCsvDevotees = [];
+    let currentQueue = [];
+    let queueIndex = 0;
+    let activeDevoteeForShare = null;
+
+    const EVENT_TARGET_DATE = new Date("2026-10-03T04:30:00+05:30").getTime();
+
+    // AUTH OBSERVER
+    auth.onAuthStateChanged((user) => {
+      const loginModal = document.getElementById('login-modal');
+      if (user) {
+        loginModal.classList.add('hidden');
+        listenToLiveFirestoreData();
+      } else {
+        loginModal.classList.remove('hidden');
+      }
+    });
+
+    async function handleRealFirebaseLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const pass = document.getElementById('login-password').value;
+      const btn = document.getElementById('login-submit-btn');
+      const errBox = document.getElementById('login-error');
+
+      btn.disabled = true;
+      btn.innerText = 'प्रमाणीकरण हो रहा है...';
+      errBox.classList.add('hidden');
+
+      try {
+        await auth.signInWithEmailAndPassword(email, pass);
+        showToast('प्रवेश सफल 🙏');
+      } catch (err) {
+        errBox.innerText = 'ईमेल या पासवर्ड सही नहीं है।';
+        errBox.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'प्रवेश करें →';
+      }
+    }
+
+    async function handleRealFirebaseLogout() {
+      await auth.signOut();
+      showToast('लॉगआउट सफल');
+    }
+
+    // LIVE FIRESTORE LISTENER
+    function listenToLiveFirestoreData() {
+      db.collection('participants').onSnapshot((snapshot) => {
+        liveParticipants = [];
+        snapshot.forEach((doc) => {
+          liveParticipants.push({ id: doc.id, ...doc.data() });
+        });
+
+        renderLiveDevotees(liveParticipants);
+        updateDynamicMetrics(liveParticipants);
+      });
+    }
+
+    // RENDER DISCIPLES IN CREAM CARDS
+    function renderLiveDevotees(list) {
+      const container = document.getElementById('participants-table-body');
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10 space-y-2">
+            <span class="text-3xl block">🪷</span>
+            <div class="text-xs font-bold text-stone-600">अभी कोई दीक्षार्थी नहीं जोड़ा गया।</div>
+            <button onclick="openAddParticipantModal()" class="text-xs bg-[#D6A94A] text-[#07151D] font-bold px-3 py-1.5 rounded-lg shadow">
+              + पहला दीक्षार्थी जोड़ें
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach((p) => {
+        const item = document.createElement('div');
+        item.className = "p-3 rounded-2xl bg-white border border-[#E8DCC4] flex items-center justify-between text-xs hover:border-[#D6A94A] transition-all shadow-sm";
+
+        item.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-[#D6A94A] to-amber-200 p-0.5 flex-shrink-0">
+              <img src="/logo.png" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=100'" class="w-full h-full object-cover rounded-full">
+            </div>
+            <div>
+              <div class="font-bold text-[#241B0E] text-sm">${p.name || 'अज्ञात'}</div>
+              <div class="text-[10px] text-stone-500 font-mono">${p.phone || '-'} • बेल्ट: ${p.belt || '-'}</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 flex-wrap justify-end">
+            <span class="px-2 py-0.5 rounded-full text-[9px] font-mono ${p.waSent ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+              ${p.waSent ? '✓ भेजा गया' : 'Pending'}
+            </span>
+            <button onclick="openSingleDevoteeShareModal('${p.name}', '${p.phone}', '${p.id}')" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-[#43B982] text-white text-xs font-bold shadow flex items-center gap-1 hover:brightness-110">
+              <span>📤</span> <span>शेयर करें</span>
+            </button>
+            <button onclick="copyParticipantCleanLink('${p.id}')" class="p-1 text-stone-600 hover:text-black" title="लिंक कॉपी करें">🔗</button>
+            <button onclick="deleteParticipant('${p.id}')" class="p-1 text-red-500 hover:text-red-700" title="हटाएँ">🗑️</button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function updateDynamicMetrics(list) {
+      const total = list.length;
+      const opens = list.reduce((a, c) => a + (c.opens || 0), 0);
+      const shares = list.reduce((a, c) => a + (c.shares || 0), 0);
+
+      document.getElementById('stat-total').innerText = total;
+      document.getElementById('stat-opens').innerText = opens;
+      document.getElementById('stat-shares').innerText = shares;
+
+      document.getElementById('donut-center-total').innerText = total;
+      const openPct = total > 0 ? Math.min(Math.round((opens / total) * 100), 100) : 0;
+      document.getElementById('donut-segment').setAttribute('stroke-dasharray', `${openPct}, 100`);
+      document.getElementById('donut-stat-opened').innerText = `${opens} (${openPct}%)`;
+      document.getElementById('donut-stat-unopened').innerText = `${Math.max(0, total - opens)}`;
+      document.getElementById('donut-stat-shared').innerText = `${shares}`;
+    }
+
+    function filterDevoteesList() {
+      const q = document.getElementById('search-input').value.toLowerCase().trim();
+      const status = document.getElementById('status-filter').value;
+
+      const filtered = liveParticipants.filter((p) => {
+        const matchesQ = (p.name || '').toLowerCase().includes(q) || (p.phone || '').includes(q);
+        if (!matchesQ) return false;
+        if (status === 'ACTIVE') return p.active !== false;
+        if (status === 'INACTIVE') return p.active === false;
+        return true;
+      });
+
+      renderLiveDevotees(filtered);
+    }
+
+    // ============================================================================
+    // ADVANCED HIGH-CONTRAST CANVAS GENERATOR (Devotee Card on /logo.png)
+    // ============================================================================
+    async function createPersonalizedCardBlob(devoteeName) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = '/logo.png';
+
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          canvas.width = img.naturalWidth || 1024;
+          canvas.height = img.naturalHeight || 1280;
+
+          // Draw Temple Background
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          const centerX = canvas.width / 2;
+
+          // Header
+          ctx.textAlign = 'center';
+          ctx.font = 'bold 36px "Rozha One", serif';
+          ctx.fillStyle = '#8C6518';
+          ctx.fillText('🪷 श्री हरिनाम दीक्षा समारोह 🪷', centerX, canvas.height * 0.43);
+
+          // HIGH-CONTRAST READABLE DEVOTEE NAME
+          ctx.font = 'bold 54px "Noto Sans Devanagari", "Rozha One", serif';
+          ctx.fillStyle = '#1B1208'; // Deep readable dark tone
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
+          ctx.shadowBlur = 4;
+          ctx.fillText(`प्रिय ${devoteeName} जी`, centerX, canvas.height * 0.50);
+
+          // Invitation line
+          ctx.shadowBlur = 0;
+          ctx.font = '500 30px "Noto Sans Devanagari", sans-serif';
+          ctx.fillStyle = '#4A3415';
+          ctx.fillText('आपको इस पावन अवसर पर सादर आमंत्रित किया जाता है।', centerX, canvas.height * 0.55);
+
+          // Plaque date & venue
+          ctx.font = 'bold 28px "Noto Sans Devanagari", serif';
+          ctx.fillStyle = '#2C1D08';
+          ctx.fillText('03 अक्टूबर 2026 • प्रातः 04:30 बजे', centerX, canvas.height * 0.84);
+
+          ctx.font = '24px "Noto Sans Devanagari", sans-serif';
+          ctx.fillStyle = '#3E2A0E';
+          ctx.fillText('श्री राधा कुंजबिहारी मंदिर, कैंप, पुणे', centerX, canvas.height * 0.88);
+
+          canvas.toBlob((blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error('Canvas blob generation failed'));
+          }, 'image/png');
+        };
+
+        img.onerror = () => reject(new Error('logo.png image load failed'));
+      });
+    }
+
+    // ============================================================================
+    // 1-CLICK DIRECT SHARE (NATIVE PHOTO FILE + TEXT INTO WHATSAPP)
+    // ============================================================================
+    function openSingleDevoteeShareModal(name, phone, id) {
+      activeDevoteeForShare = { name, phone, id };
+      const link = `${window.location.origin}/i/${id}`;
+      const msg = `हरे कृष्ण! 🙏\n\nप्रिय ${name} जी,\nआपको *श्री हरिनाम दीक्षा समारोह* के इस पावन अवसर पर सादर आमंत्रित किया जाता है।\n\n📅 03 अक्टूबर 2026 | प्रातः 04:30 बजे\n📍 श्री राधा कुंजबिहारी मंदिर, कैंप, पुणे\n\n🪷 आपका व्यक्तिगत निमंत्रण दर्शन लिंक:\n${link}`;
+
+      document.getElementById('share-modal-name').innerText = name;
+      document.getElementById('share-modal-phone').innerText = phone || 'उपलब्ध नहीं';
+      document.getElementById('share-modal-preview').innerText = msg;
+
+      openModal('modal-single-share');
+    }
+
+    async function executeNativePhotoAndTextShare() {
+      if (!activeDevoteeForShare) return;
+      const { name, phone, id } = activeDevoteeForShare;
+      const link = `${window.location.origin}/i/${id}`;
+      const msg = `हरे कृष्ण! 🙏\n\nप्रिय ${name} जी,\nआपको *श्री हरिनाम दीक्षा समारोह* के इस पावन अवसर पर सादर आमंत्रित किया जाता है।\n\n📅 03 अक्टूबर 2026 | प्रातः 04:30 बजे\n📍 श्री राधा कुंजबिहारी मंदिर, कैंप, पुणे\n\n🪷 आपका व्यक्तिगत निमंत्रण दर्शन लिंक:\n${link}`;
+
+      showToast('फोटो कार्ड तैयार हो रहा है...');
+
+      try {
+        const cardBlob = await createPersonalizedCardBlob(name);
+        const cardFile = new File([cardBlob], `दीक्षा_कार्ड_${name.replace(/\s+/g, '_')}.png`, { type: 'image/png' });
+
+        // Native File Share (Shares real photo directly into WhatsApp)
+        if (navigator.canShare && navigator.canShare({ files: [cardFile] })) {
+          await navigator.share({
+            files: [cardFile],
+            title: 'श्री हरिनाम दीक्षा समारोह',
+            text: msg
+          });
+          db.collection('participants').doc(id).update({ waSent: true }).catch(()=>{});
+          closeModal('modal-single-share');
+          showToast('सफलतापूर्वक शेयर किया गया ✓');
+          return;
+        }
+      } catch (err) {
+        console.warn('Native file share failed or canceled, falling back:', err);
+      }
+
+      // Fallback: Trigger instant image download and open direct WhatsApp chat
+      downloadActiveShareCard();
+      const cleanPhone = (phone || '').replace(/[^0-9]/g, '');
+      const waUrl = cleanPhone
+        ? `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(msg)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, '_blank');
+      db.collection('participants').doc(id).update({ waSent: true }).catch(()=>{});
+      closeModal('modal-single-share');
+    }
+
+    async function downloadActiveShareCard() {
+      if (!activeDevoteeForShare) return;
+      try {
+        const cardBlob = await createPersonalizedCardBlob(activeDevoteeForShare.name);
+        const url = URL.createObjectURL(cardBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `दीक्षा_कार्ड_${activeDevoteeForShare.name.replace(/\s+/g, '_')}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('फोटो कार्ड डाउनलोड हो गया ✓');
+      } catch(e) {
+        showToast('त्रुटि: फोटो कार्ड नहीं बन सका');
+      }
+    }
+
+    // ============================================================================
+    // BATCH WHATSAPP QUEUE DISPATCHER
+    // ============================================================================
+    function openBatchWhatsAppModal(batchSize) {
+      const pending = liveParticipants.filter(p => !p.waSent);
+      const pool = pending.length > 0 ? pending : liveParticipants;
+
+      currentQueue = pool.slice(0, batchSize);
+      if (currentQueue.length === 0) {
+        showToast('कोई दीक्षार्थी नहीं मिला!');
+        return;
+      }
+
+      queueIndex = 0;
+      updateQueueModalView();
+      openModal('modal-batch-wa');
+    }
+
+    function updateQueueModalView() {
+      if (queueIndex >= currentQueue.length) {
+        closeModal('modal-batch-wa');
+        showToast('कतार सफलतापूर्वक पूर्ण हुई! ✓');
+        return;
+      }
+
+      const p = currentQueue[queueIndex];
+      document.getElementById('wa-queue-progress').innerText = `${queueIndex + 1} / ${currentQueue.length}`;
+      const pct = Math.round(((queueIndex + 1) / currentQueue.length) * 100);
+      document.getElementById('wa-progress-bar').style.width = `${pct}%`;
+
+      document.getElementById('queue-devotee-name').innerText = p.name;
+      document.getElementById('queue-devotee-phone').innerText = p.phone;
+
+      const cleanLink = `${window.location.origin}/i/${p.id}`;
+      const msg = `हरे कृष्ण! 🙏\n\nप्रिय ${p.name} जी,\nआपको *श्री हरिनाम दीक्षा समारोह* के इस पावन अवसर पर सादर आमंत्रित किया जाता है।\n\n📅 03 अक्टूबर 2026 | प्रातः 04:30 बजे\n📍 श्री राधा कुंजबिहारी मंदिर, कैंप, पुणे\n\n🪷 आपका पावन निमंत्रण दर्शन लिंक:\n${cleanLink}`;
+      document.getElementById('queue-preview-msg').innerText = msg;
+    }
+
+    async function downloadCurrentQueueDevoteeCard() {
+      if (currentQueue[queueIndex]) {
+        activeDevoteeForShare = currentQueue[queueIndex];
+        await downloadActiveShareCard();
+      }
+    }
+
+    function sendCurrentAndAdvanceQueue() {
+      const p = currentQueue[queueIndex];
+      const cleanPhone = (p.phone || '').replace(/[^0-9]/g, '');
+      const cleanLink = `${window.location.origin}/i/${p.id}`;
+      const msg = `हरे कृष्ण! 🙏\n\nप्रिय ${p.name} जी,\nआपको *श्री हरिनाम दीक्षा समारोह* के इस पावन अवसर पर सादर आमंत्रित किया जाता है।\n\n📅 03 अक्टूबर 2026 | प्रातः 04:30 बजे\n📍 श्री राधा कुंजबिहारी मंदिर, कैंप, पुणे\n\n🪷 आपका पावन निमंत्रण दर्शन लिंक:\n${cleanLink}`;
+
+      const waUrl = cleanPhone
+        ? `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(msg)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+
+      window.open(waUrl, '_blank');
+      db.collection('participants').doc(p.id).update({ waSent: true }).catch(()=>{});
+      queueIndex++;
+      updateQueueModalView();
+    }
+
+    function skipQueueItem() {
+      queueIndex++;
+      updateQueueModalView();
+    }
+
+    // CSV FILE HANDLERS
+    function handleCsvFileSelected(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        parseCsvRaw(e.target.result);
+      };
+      reader.readAsText(file);
+    }
+
+    function parseCsvRaw(text) {
+      const lines = text.trim().split(/\r\n|\n/);
+      parsedCsvDevotees = [];
+      const existingPhones = new Set(liveParticipants.map(p => (p.phone || '').trim()));
+
+      lines.forEach((line, idx) => {
+        if (idx === 0 && (line.toLowerCase().includes('name') || line.toLowerCase().includes('नाम'))) return;
+        const parts = line.split(',');
+        if (parts.length >= 2) {
+          const name = parts[0].trim();
+          const phone = parts[1].trim();
+          const belt = parts[2] ? parts[2].trim() : 'A-01';
+
+          if (name && phone && !existingPhones.has(phone)) {
+            parsedCsvDevotees.push({ name, phone, belt });
+          }
+        }
+      });
+
+      document.getElementById('csv-count-total').innerText = lines.length;
+      document.getElementById('csv-count-valid').innerText = parsedCsvDevotees.length;
+      document.getElementById('csv-preview-box').classList.remove('hidden');
+      document.getElementById('btn-confirm-csv').disabled = parsedCsvDevotees.length === 0;
+    }
+
+    async function handleBatchImportToFirestore() {
+      if (parsedCsvDevotees.length === 0) return;
+      const btn = document.getElementById('btn-confirm-csv');
+      btn.disabled = true;
+      btn.innerText = 'सेव हो रहा है...';
+
+      try {
+        const batch = db.batch();
+        parsedCsvDevotees.forEach((d) => {
+          const token = `DK-2026-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+          const ref = db.collection('participants').doc(token);
+          batch.set(ref, {
+            name: d.name,
+            phone: d.phone,
+            belt: d.belt,
+            active: true,
+            waSent: false,
+            opens: 0,
+            shares: 0,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        });
+
+        await batch.commit();
+        closeModal('modal-csv-import');
+        showToast(`${parsedCsvDevotees.length} दीक्षार्थी इम्पोर्ट हुए ✓`);
+      } catch (e) {
+        showToast('इम्पोर्ट में त्रुटि हुई');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'इम्पोर्ट करें →';
+      }
+    }
+
+    async function handleSaveNewParticipant(e) {
+      e.preventDefault();
+      const name = document.getElementById('input-devotee-name').value.trim();
+      const phone = document.getElementById('input-devotee-phone').value.trim();
+      const belt = document.getElementById('input-devotee-belt').value.trim() || 'A-01';
+
+      if (!name || !phone) return;
+
+      const token = `DK-2026-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+      try {
+        await db.collection('participants').doc(token).set({
+          name, phone, belt, active: true, waSent: false, opens: 0, shares: 0,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        closeModal('modal-add-devotee');
+        document.getElementById('input-devotee-name').value = '';
+        document.getElementById('input-devotee-phone').value = '';
+        document.getElementById('input-devotee-belt').value = '';
+        showToast(`${name} जी को जोड़ दिया गया ✓`);
+      } catch(err) {
+        showToast('डेटा सेव नहीं हो सका');
+      }
+    }
+
+    async function deleteParticipant(id) {
+      if (confirm('क्या आप इस दीक्षार्थी को हटाना चाहते हैं?')) {
+        await db.collection('participants').doc(id).delete();
+        showToast('रिकॉर्ड हटा दिया गया');
+      }
+    }
+
+    function copyParticipantCleanLink(id) {
+      const cleanLink = `${window.location.origin}/i/${id}`;
+      navigator.clipboard.writeText(cleanLink);
+      showToast('क्लीन लिंक कॉपी हो गया ✓');
+    }
+
+    function copyPublicSiteLink() {
+      navigator.clipboard.writeText(window.location.origin);
+      showToast('वेबसाइट लिंक कॉपी हो गया ✓');
+    }
+
+    function startAdminCountdown() {
+      const dEl = document.getElementById('adm-cd-days');
+      const hEl = document.getElementById('adm-cd-hours');
+      const mEl = document.getElementById('adm-cd-minutes');
+      const sEl = document.getElementById('adm-cd-seconds');
+
+      function tick() {
+        const now = new Date().getTime();
+        const diff = EVENT_TARGET_DATE - now;
+        if (diff <= 0) return;
+
+        dEl.innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        hEl.innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        mEl.innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        sEl.innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+      tick();
+      setInterval(tick, 1000);
+    }
+    startAdminCountdown();
+
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    function openAddParticipantModal() { openModal('modal-add-devotee'); }
+    function openCsvModal() { openModal('modal-csv-import'); }
+
+    function toggleMobileSidebar() {
+      document.getElementById('sidebar-drawer').classList.toggle('-translate-x-full');
+    }
+    function scrollToSection(id) {
+      toggleMobileSidebar();
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function showToast(msg) {
+      const toast = document.getElementById('admin-toast');
+      document.getElementById('toast-text').innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 2500);
+    }
+  </script>
+</body>
+</html>
