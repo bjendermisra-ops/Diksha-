@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>श्री हरिनाम दीक्षा समारोह — पावन डिजिटल निमंत्रण</title>
+
+  <!-- OpenGraph WhatsApp Rich Preview Meta Tags -->
+  <meta property="og:title" content="श्री हरिनाम दीक्षा समारोह — पावन डिजिटल निमंत्रण">
+  <meta property="og:description" content="परम पूज्य श्री लोकनाथ स्वामी महाराज के करकमलों से पावन दीक्षा समारोह | 03 अक्टूबर 2026, पुणे">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?q=80&w=1200">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#D4AF37">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#FAF6EE',
+            cardborder: '#E8D8B5',
+            goldaccent: '#C59A3F',
+            goldbtn: '#D89E34',
+            darktext: '#2C2214',
+            subtext: '#6B583E'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Devanagari & Classical Serif Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Yantramanav:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <style>
+    body {
+      font-family: 'Yantramanav', sans-serif;
+      background-color: #0A0907;
+      color: #2C2214;
+    }
+    .font-serif-sacred {
+      font-family: 'Rozha One', serif;
+    }
+    .ivory-card {
+      background-color: #FAF6EE;
+      border: 1.5px solid #E4D2A9;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(216, 158, 52, 0.2);
+    }
+    .pb-safe {
+      padding-bottom: max(0.85rem, env(safe-area-inset-bottom));
+    }
+  </style>
+</head>
+<body class="selection:bg-amber-800 selection:text-white antialiased pb-28 md:pb-12">
+
+  <!-- BOOT LOADER -->
+  <div id="boot-loader" class="fixed inset-0 bg-[#080705] flex flex-col items-center justify-center text-amber-100 z-50 transition-opacity duration-300">
+    <span class="text-4xl animate-pulse">🪷</span>
+    <h2 class="mt-3 text-lg font-serif-sacred tracking-widest text-[#E6CA65]">हरे कृष्ण</h2>
+  </div>
+
+  <!-- Deactivated View -->
+  <div id="deactivated-view" class="hidden min-h-screen bg-[#080705] flex items-center justify-center p-6 text-center">
+    <div class="max-w-md w-full p-8 rounded-2xl bg-[#FAF6EE] border-2 border-[#D89E34] space-y-4 shadow-2xl">
+      <div class="text-3xl">🪷</div>
+      <h2 class="text-2xl font-serif-sacred font-bold text-[#2C2214]">हरे कृष्ण</h2>
+      <p class="text-sm text-[#6B583E] leading-relaxed">यह निमंत्रण वर्तमान में सक्रिय नहीं है।</p>
+      <p class="text-xs text-[#8C6D38]">अधिक जानकारी अथवा सहायता हेतु कृपया आयोजन समिति से संपर्क करें।</p>
+    </div>
+  </div>
+
+  <!-- Toast Alert -->
+  <div id="toast-alert" class="hidden fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-[#2C2214] border border-[#D89E34] text-[#FAF6EE] px-6 py-2.5 rounded-full shadow-2xl text-xs sm:text-sm font-medium flex items-center gap-2">
+    <span>✓</span> <span id="toast-text">निमंत्रण लिंक कॉपी हो गया</span>
+  </div>
+
+  <!-- YouTube Modal -->
+  <div id="yt-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="relative w-full max-w-2xl bg-black rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl">
+      <button onclick="closeVideoModal()" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/70 text-white flex items-center justify-center hover:bg-black">✕</button>
+      <div class="relative pt-[56.25%]">
+        <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="YouTube Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div id="main-content">
+
+    <!-- SCREEN 01: CINEMATIC HERO -->
+    <section class="relative min-h-[100svh] w-full flex flex-col items-center justify-between p-6 text-center overflow-hidden bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1609766857041-ed402ea8069a?q=80&w=1600&auto=format&fit=crop');">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-black/60 to-[#0A0907]"></div>
+
+      <header class="relative z-10 pt-4 flex items-center justify-between w-full max-w-md px-2">
+        <span class="text-2xl">🪷</span>
+        <p class="text-xs sm:text-sm font-medium tracking-[0.25em] text-[#E6CA65] uppercase">हरे कृष्ण</p>
+        <span class="text-xl text-amber-200">☰</span>
+      </header>
+
+      <div class="relative z-10 max-w-md mx-auto space-y-3 my-auto">
+        <h1 class="text-3xl sm:text-5xl font-serif-sacred font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#FFF5D6] via-[#E6CA65] to-[#B89230] drop-shadow-md leading-tight">
+          श्री हरिनाम<br>दीक्षा समारोह
+        </h1>
+        <div class="h-0.5 w-20 bg-gradient-to-r from-transparent via-[#E6CA65] to-transparent mx-auto my-2"></div>
+        <p class="text-base sm:text-lg font-medium text-amber-100">03 अक्टूबर 2026</p>
+        <p class="text-xs sm:text-sm text-amber-300/90 font-light">शनिवार • पुणे</p>
+      </div>
+
+      <div class="relative z-10 pb-8 space-y-3 w-full max-w-xs">
+        <button onclick="scrollToId('personalized-card')" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#C59A3F] via-[#E8B854] to-[#C59A3F] text-black font-semibold text-sm shadow-[0_0_25px_rgba(216,158,52,0.4)] hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+          <span>🪷</span> पावन निमंत्रण खोलें
+        </button>
+        <p class="text-xs italic text-amber-200/80 pt-2 font-serif-sacred">&ldquo;हरिनाम ही जीवन का सार है&rdquo;</p>
+      </div>
+    </section>
+
+    <!-- MAIN BODY: ROYAL IVORY CARDS -->
+    <main class="max-w-md mx-auto px-4 space-y-8 -mt-6 relative z-20">
+
+      <!-- SCREEN 02: PERSONALIZED INVITATION -->
+      <section id="personalized-card" class="ivory-card rounded-3xl p-6 sm:p-7 text-center space-y-5 relative overflow-hidden scroll-mt-6">
+        <div class="flex items-center justify-between border-b border-[#E8D8B5] pb-2 text-xs text-subtext">
+          <span>🪷</span>
+          <span class="font-serif-sacred text-darktext tracking-wider">हरे कृष्ण</span>
+          <span>☰</span>
+        </div>
+
+        <p class="text-xs italic text-subtext">यह निमंत्रण आपके लिए विशेष रूप से तैयार किया गया है।</p>
+
+        <div class="space-y-2">
+          <h2 id="participant-welcome-name" class="text-2xl font-serif-sacred font-bold text-darktext">
+            प्रिय दीक्षार्थी भक्त जी,
+          </h2>
+          <p class="text-xs sm:text-sm text-subtext leading-relaxed px-2">
+            आपको श्री हरिनाम दीक्षा समारोह के इस पावन अवसर पर सादर आमंत्रित किया जाता है।
+          </p>
+        </div>
+
+        <!-- Guru Maharaj Portrait -->
+        <div class="flex items-center justify-center gap-4 py-2 text-left">
+          <div class="w-20 h-20 rounded-full p-1 bg-gradient-to-tr from-[#D89E34] to-[#F3E5AB] flex-shrink-0 shadow-md">
+            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=400&auto=format&fit=crop" alt="श्री लोकनाथ स्वामी महाराज" class="w-full h-full object-cover rounded-full">
+          </div>
+          <div>
+            <h3 class="text-sm font-serif-sacred font-bold text-darktext leading-tight">श्री लोकनाथ स्वामी महाराज</h3>
+            <p class="text-[11px] text-subtext mt-0.5">के करकमलों से</p>
+          </div>
+        </div>
+
+        <!-- Live Countdown -->
+        <div class="space-y-2 pt-2 border-t border-[#E8D8B5]">
+          <h4 id="countdown-heading" class="text-xs font-semibold text-darktext tracking-wide">समारोह प्रारंभ होने में शेष समय</h4>
+
+          <div id="countdown-active-grid" class="grid grid-cols-4 gap-2 max-w-xs mx-auto">
+            <div class="bg-[#1C160E] text-white rounded-xl p-2 text-center shadow">
+              <div id="cd-days" class="text-lg font-bold font-mono text-[#F7E7B4]">00</div>
+              <div class="text-[9px] text-amber-300/80">दिन</div>
+            </div>
+            <div class="bg-[#1C160E] text-white rounded-xl p-2 text-center shadow">
+              <div id="cd-hours" class="text-lg font-bold font-mono text-[#F7E7B4]">00</div>
+              <div class="text-[9px] text-amber-300/80">घंटे</div>
+            </div>
+            <div class="bg-[#1C160E] text-white rounded-xl p-2 text-center shadow">
+              <div id="cd-minutes" class="text-lg font-bold font-mono text-[#F7E7B4]">00</div>
+              <div class="text-[9px] text-amber-300/80">मिनट</div>
+            </div>
+            <div class="bg-[#1C160E] text-white rounded-xl p-2 text-center shadow">
+              <div id="cd-seconds" class="text-lg font-bold font-mono text-[#F7E7B4]">00</div>
+              <div class="text-[9px] text-amber-300/80">सेकंड</div>
+            </div>
+          </div>
+
+          <div id="countdown-live-banner" class="hidden py-3 text-base font-serif-sacred font-bold text-[#D89E34] animate-pulse">
+            🪷 आज है आपका पावन दीक्षा दिवस
+          </div>
+        </div>
+
+        <!-- Temple Skyline Watermark -->
+        <div class="pt-3 opacity-60">
+          <svg class="w-28 h-auto mx-auto text-[#C59A3F]" viewBox="0 0 120 30" fill="currentColor">
+            <path d="M60 2 L66 12 L75 12 L68 18 L71 28 L60 22 L49 28 L52 18 L45 12 L54 12 Z"/>
+            <path d="M20 15 L25 22 L35 22 L27 26 L30 30 L20 27 L10 30 L13 26 L5 22 L15 22 Z"/>
+            <path d="M100 15 L105 22 L115 22 L107 26 L110 30 L100 27 L90 30 L93 26 L85 22 L95 22 Z"/>
+          </svg>
+        </div>
+      </section>
+
+      <!-- SCREEN 03: SCHEDULE & INSTRUCTIONS -->
+      <section class="ivory-card rounded-3xl p-6 sm:p-7 space-y-6 text-left">
+        <div class="flex items-center gap-2 border-b border-[#E8D8B5] pb-3">
+          <span class="text-base text-[#C59A3F]">📜</span>
+          <h3 class="text-base font-serif-sacred font-bold text-darktext">कार्यक्रम एवं समय सारिणी</h3>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#EADAB8] border border-[#C59A3F] flex items-center justify-center text-xs text-[#523E1E] flex-shrink-0 font-bold">🏛️</div>
+            <div>
+              <div class="text-xs font-bold text-darktext">04:30 AM</div>
+              <p class="text-xs text-subtext">मंगल आरती हेतु उपस्थित रहें</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#EADAB8] border border-[#C59A3F] flex items-center justify-center text-xs text-[#523E1E] flex-shrink-0 font-bold">📢</div>
+            <div>
+              <div class="text-xs font-bold text-darktext">आरती के बाद</div>
+              <p class="text-xs text-subtext">आवश्यक सूचनाएँ दी जाएँगी</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#EADAB8] border border-[#C59A3F] flex items-center justify-center text-xs text-[#523E1E] flex-shrink-0 font-bold">📿</div>
+            <div>
+              <div class="text-xs font-bold text-darktext">16 माला</div>
+              <p class="text-xs text-subtext">अपनी 16 माला जप पूर्ण करें</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#EADAB8] border border-[#C59A3F] flex items-center justify-center text-xs text-[#523E1E] flex-shrink-0 font-bold">🎁</div>
+            <div>
+              <div class="text-xs font-bold text-darktext">07:00 AM</div>
+              <p class="text-xs text-subtext">दीक्षा किट वितरण</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-[#E8D8B5] space-y-3">
+          <h4 class="text-sm font-serif-sacred font-bold text-darktext">महत्वपूर्ण निर्देश</h4>
+          <ol class="space-y-1.5 text-xs text-subtext leading-snug list-decimal list-inside">
+            <li>सभी दीक्षार्थी भक्त समय का विशेष ध्यान रखें।</li>
+            <li>दीक्षा से पहले अपनी 16 माला जप पूरी करें।</li>
+            <li>सभी दीक्षार्थी भक्त वैष्णव वेश परिधान करें।</li>
+            <li>प्रभुजी के लिए शिर मुंडन अनिवार्य है और शिखा रखना है।</li>
+            <li>दीक्षार्थी भक्त उपवास रखें।</li>
+            <li>बेल्ट नंबर के अनुसार स्थान ग्रहण करें।</li>
+            <li>शांति बनाए रखें।</li>
+            <li>सभी आयोजकीय सूचनाओं का पालन करें।</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- SCREEN 04: VENUE & MAP -->
+      <section class="ivory-card rounded-3xl p-6 sm:p-7 space-y-4 text-center">
+        <div class="flex items-center justify-between border-b border-[#E8D8B5] pb-2 text-xs text-subtext">
+          <span>🪷</span>
+          <span class="font-serif-sacred text-darktext tracking-wider">समारोह स्थल</span>
+          <span>☰</span>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-sm border border-[#E8D8B5]">
+          <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop" alt="मंदिर" class="w-full h-36 object-cover">
+        </div>
+
+        <div class="space-y-1 text-center">
+          <h4 class="text-base font-serif-sacred font-bold text-darktext">श्री राधा कुंजबिहारी मंदिर</h4>
+          <p class="text-xs text-subtext leading-relaxed">
+            📍 तारापोर रोड, दस्तूर बॉयज स्कूल के पास,<br>कैंप, पुणे
+          </p>
+        </div>
+
+        <div class="space-y-2 pt-1">
+          <a href="https://www.google.com/maps/search/?api=1&query=ISKCON+Pune+Camp+Sri+Radha+Kunjbihari+Mandir" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#D89E34] to-[#C59A3F] text-black font-semibold text-xs flex items-center justify-center gap-1.5 shadow hover:brightness-105">
+            <span>📍</span> मुझे रास्ता दिखाएँ
+          </a>
+          <button onclick="downloadCalendarICS()" class="w-full py-2.5 px-4 rounded-xl bg-transparent border border-[#C59A3F] text-darktext font-semibold text-xs flex items-center justify-center gap-1.5 hover:bg-[#EADAB8]/40">
+            <span>📅</span> Calendar में जोड़ें
+          </button>
+        </div>
+      </section>
+
+      <!-- SCREEN 06: YOUTUBE SECTION -->
+      <section class="ivory-card rounded-3xl p-6 sm:p-7 space-y-4 text-left">
+        <div class="flex items-center gap-2 border-b border-[#E8D8B5] pb-2">
+          <span>🪷</span>
+          <h3 class="text-sm font-serif-sacred font-bold text-darktext">भक्ति की यात्रा को आगे बढ़ाएँ</h3>
+        </div>
+
+        <p class="text-xs text-subtext leading-relaxed">
+          श्री कृष्ण, राधारानी, हरिनाम और भक्ति से जुड़े और भी सुंदर वीडियो देखने के लिए हमारे YouTube परिवार से जुड़ें।
+        </p>
+
+        <!-- Video Card with 6Zh9HzBA9jo -->
+        <div class="relative rounded-2xl overflow-hidden border border-[#E8D8B5] group bg-black">
+          <img src="https://img.youtube.com/vi/6Zh9HzBA9jo/maxresdefault.jpg" alt="YouTube Thumbnail" class="w-full h-44 object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+          <button onclick="openVideoModal('6Zh9HzBA9jo')" class="absolute inset-0 m-auto w-12 h-12 rounded-full bg-red-600/90 text-white flex items-center justify-center text-lg shadow-xl hover:scale-110 transition-transform">
+            ▶
+          </button>
+        </div>
+
+        <div class="space-y-2 pt-1">
+          <a href="https://www.youtube.com/watch?v=6Zh9HzBA9jo" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-3 rounded-xl bg-red-600 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow hover:bg-red-700">
+            <span>▶</span> YouTube पर भक्ति दर्शन
+          </a>
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-xl bg-transparent border border-red-500/40 text-red-700 text-xs font-medium flex items-center justify-center gap-2 hover:bg-red-50">
+            <span>🪷</span> हमारे YouTube परिवार से जुड़ें
+          </a>
+        </div>
+      </section>
+
+      <!-- SCREEN 07: SHARE INVITATION -->
+      <section class="ivory-card rounded-3xl p-6 sm:p-7 space-y-4 text-center">
+        <h3 class="text-base font-serif-sacred font-bold text-darktext">निमंत्रण शेयर करें</h3>
+        <p class="text-xs text-subtext">इस पावन निमंत्रण को अपने किसी भी भक्त मित्र तक पहुँचाएँ।</p>
+
+        <button onclick="shareViaWhatsApp()" class="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-md">
+          <span>💬</span> WhatsApp पर शेयर करें
+        </button>
+
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="copyInvitationLink()" class="py-2.5 px-2 rounded-xl bg-white border border-[#E8D8B5] text-darktext text-xs font-medium hover:bg-[#F3EBD8]">
+            🔗 लिंक कॉपी करें
+          </button>
+          <button onclick="triggerNativeShare()" class="py-2.5 px-2 rounded-xl bg-white border border-[#E8D8B5] text-darktext text-xs font-medium hover:bg-[#F3EBD8]">
+            ↗ अन्य माध्यम से शेयर करें
+          </button>
+        </div>
+
+        <div class="pt-4 border-t border-[#E8D8B5] text-left space-y-3">
+          <h4 class="text-xs font-bold text-darktext">किसी भक्त को आमंत्रित करें</h4>
+          <form onsubmit="handleReferralSubmit(event)" class="space-y-2.5">
+            <div>
+              <input id="ref-name" type="text" placeholder="भक्त का नाम" required class="w-full bg-white border border-[#E8D8B5] rounded-xl px-3 py-2 text-xs text-darktext placeholder:text-stone-400 focus:outline-none focus:border-[#D89E34]">
+            </div>
+            <div>
+              <input id="ref-phone" type="tel" placeholder="WhatsApp नंबर (वैकल्पिक)" class="w-full bg-white border border-[#E8D8B5] rounded-xl px-3 py-2 text-xs text-darktext placeholder:text-stone-400 focus:outline-none focus:border-[#D89E34]">
+            </div>
+            <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#D89E34] to-[#C59A3F] text-black font-semibold text-xs shadow hover:brightness-105">
+              निमंत्रण भेजें
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- SCREEN 08: USER CHECKLIST -->
+      <section class="ivory-card rounded-3xl p-6 sm:p-7 space-y-4 text-left">
+        <div class="text-center space-y-1">
+          <h3 class="text-base font-serif-sacred font-bold text-darktext">मेरी तैयारी</h3>
+          <p class="text-xs text-subtext">दीक्षा के लिए अपनी तैयारी की पुष्टि करें।</p>
+        </div>
+
+        <div id="checklist-container" class="space-y-2"></div>
+
+        <div class="pt-3 text-center space-y-3">
+          <p id="checklist-status" class="text-xs font-mono font-semibold text-[#8C6D38]">0 / 5 तैयारियाँ पूर्ण</p>
+          <button id="ready-btn" class="w-full py-3 rounded-xl bg-gradient-to-r from-[#D89E34] to-[#C59A3F] text-black font-bold text-xs shadow-md flex items-center justify-center gap-2">
+            <span>🪷</span> मैं दीक्षा के लिए तैयार हूँ
+          </button>
+        </div>
+      </section>
+
+      <!-- MAHAMANTRA -->
+      <section class="ivory-card rounded-3xl p-6 text-center shadow-lg space-y-2 border-2 border-[#D89E34]">
+        <div class="text-base sm:text-lg font-serif-sacred font-bold text-darktext leading-relaxed">
+          हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे<br>
+          हरे राम हरे राम राम राम हरे हरे
+        </div>
+      </section>
+
+      <footer class="pt-4 text-center space-y-2 text-xs text-amber-200/60 pb-6">
+        <p class="font-medium text-amber-100">श्री हरिनाम दीक्षा समारोह • 03 अक्टूबर 2026</p>
+        <p class="text-[10px] text-amber-300/40">© 2026 — समस्त आयोजन सेवा में समर्पित</p>
+      </footer>
+
+    </main>
+
+    <!-- FLOATING BOTTOM BAR -->
+    <aside aria-label="Quick Actions" class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-[#100D09]/95 backdrop-blur-md border-t border-[#D89E34]/40 px-6 py-2.5 flex items-center justify-between text-xs font-medium pb-safe text-amber-100">
+      <a href="https://www.google.com/maps/search/?api=1&query=ISKCON+Pune+Camp+Sri+Radha+Kunjbihari+Mandir" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-0.5 hover:text-white">
+        <span class="text-base">📍</span>
+        <span class="text-[10px]">रास्ता</span>
+      </a>
+      <div class="h-5 w-[1px] bg-amber-500/30"></div>
+      <button onclick="downloadCalendarICS()" class="flex flex-col items-center gap-0.5 hover:text-white">
+        <span class="text-base">📅</span>
+        <span class="text-[10px]">Calendar</span>
+      </button>
+      <div class="h-5 w-[1px] bg-amber-500/30"></div>
+      <button onclick="triggerNativeShare()" class="flex flex-col items-center gap-0.5 text-[#E6CA65] hover:text-white font-semibold">
+        <span class="text-base">↗</span>
+        <span class="text-[10px]">Share</span>
+      </button>
+    </aside>
+
+  </div>
+
+  <!-- JAVASCRIPT LOGIC (Auto Path & Firebase Sync) -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyASMDZyfcAjg5Nb1GAwQqkufvAdqZfy2us",
+      authDomain: "diksha-invitation.firebaseapp.com",
+      projectId: "diksha-invitation",
+      storageBucket: "diksha-invitation.firebasestorage.app",
+      messagingSenderId: "720673907233",
+      appId: "1:720673907233:web:6a3e5a0fd49012e1177960",
+      measurementId: "G-WWSJ2RED5B"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const EVENT_TARGET_DATE = new Date("2026-10-03T04:30:00+05:30").getTime();
+    const CHECKLIST_ITEMS = [
+      "मैंने 16 माला पूरी करने की तैयारी कर ली है",
+      "मैं वैष्णव वेश में उपस्थित रहूँगा/रहूँगी",
+      "मैंने सभी आवश्यक निर्देश पढ़ लिए हैं",
+      "मैं समय पर उपस्थित रहूँगा/रहूँगी",
+      "मैंने कार्यक्रम स्थल सुरक्षित कर लिया है"
+    ];
+
+    let currentDevoteeName = "दीक्षार्थी भक्त";
+    let currentToken = "";
+    let checkedIndices = [];
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Read token from clean path /i/DK-XXXX or URL query ?t= or ?token=
+        const pathParts = window.location.pathname.split('/');
+        let resolvedToken = "";
+        const idx = pathParts.indexOf('i');
+        if (idx !== -1 && pathParts[idx + 1]) {
+          resolvedToken = pathParts[idx + 1].trim();
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!resolvedToken) {
+          resolvedToken = urlParams.get('t') || urlParams.get('token') || urlParams.get('id') || "";
+        }
+        currentToken = resolvedToken;
+
+        const nameParam = urlParams.get('name');
+        if (nameParam) currentDevoteeName = nameParam.trim();
+
+        // Live Firestore participant lookup by token
+        if (currentToken) {
+          try {
+            const doc = await db.collection('participants').doc(currentToken).get();
+            if (doc.exists) {
+              const data = doc.data();
+              if (data.active === false) {
+                document.getElementById('deactivated-view').classList.remove('hidden');
+                document.getElementById('main-content').classList.add('hidden');
+                return;
+              }
+              if (data.name) currentDevoteeName = data.name;
+
+              // Track Opens increment
+              db.collection('participants').doc(currentToken).update({
+                opens: firebase.firestore.FieldValue.increment(1)
+              }).catch(()=>{});
+            }
+          } catch(e) {}
+        }
+
+        document.getElementById('participant-welcome-name').innerText = `प्रिय ${currentDevoteeName} जी,`;
+
+        // Restore checklist
+        const saved = localStorage.getItem('diksha_user_checklist_ivory');
+        if (saved) checkedIndices = JSON.parse(saved);
+        renderChecklist();
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setTimeout(() => {
+          const loader = document.getElementById('boot-loader');
+          if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 250);
+          }
+        }, 150);
+      }
+
+      startCountdownTimer();
+    });
+
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast-alert');
+      document.getElementById('toast-text').innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 2500);
+    }
+
+    function startCountdownTimer() {
+      const dEl = document.getElementById('cd-days');
+      const hEl = document.getElementById('cd-hours');
+      const mEl = document.getElementById('cd-minutes');
+      const sEl = document.getElementById('cd-seconds');
+      const grid = document.getElementById('countdown-active-grid');
+      const live = document.getElementById('countdown-live-banner');
+      const head = document.getElementById('countdown-heading');
+
+      function tick() {
+        const now = new Date().getTime();
+        const diff = EVENT_TARGET_DATE - now;
+
+        if (diff <= 0) {
+          grid.classList.add('hidden');
+          live.classList.remove('hidden');
+          head.innerText = "पावन दीक्षा दिवस";
+          return;
+        }
+
+        dEl.innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        hEl.innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        mEl.innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        sEl.innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    function renderChecklist() {
+      const container = document.getElementById('checklist-container');
+      container.innerHTML = '';
+
+      CHECKLIST_ITEMS.forEach((text, idx) => {
+        const isChecked = checkedIndices.includes(idx);
+        const item = document.createElement('div');
+        item.onclick = () => toggleChecklist(idx);
+        item.className = `flex items-center gap-3 p-2.5 rounded-xl border cursor-pointer transition-all ${
+          isChecked 
+            ? 'bg-emerald-50 border-emerald-400 text-emerald-900 font-medium' 
+            : 'bg-white border-[#E8D8B5] text-darktext hover:border-[#D89E34]'
+        }`;
+
+        item.innerHTML = `
+          <span class="w-5 h-5 rounded-md flex items-center justify-center text-xs font-bold ${
+            isChecked ? 'bg-emerald-600 text-white' : 'border border-stone-300'
+          }">
+            ${isChecked ? '✓' : ''}
+          </span>
+          <span class="text-xs">${text}</span>
+        `;
+        container.appendChild(item);
+      });
+
+      document.getElementById('checklist-status').innerText = `${checkedIndices.length} / ${CHECKLIST_ITEMS.length} तैयारियाँ पूर्ण`;
+    }
+
+    function toggleChecklist(index) {
+      if (checkedIndices.includes(index)) {
+        checkedIndices = checkedIndices.filter(i => i !== index);
+      } else {
+        checkedIndices.push(index);
+      }
+      localStorage.setItem('diksha_user_checklist_ivory', JSON.stringify(checkedIndices));
+      renderChecklist();
+    }
+
+    function downloadCalendarICS() {
+      const ics = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Diksha//Devotional Invitation//HI
+BEGIN:VEVENT
+UID:${Date.now()}@dikshaplat.in
+DTSTAMP:20261001T000000Z
+DTSTART:20261002T230000Z
+DTEND:20261003T070000Z
+SUMMARY:श्री हरिनाम दीक्षा समारोह
+DESCRIPTION:हरिनाम ही जीवन का सार है - श्री लोकनाथ स्वामी महाराज
+LOCATION:श्री राधा कुंजबिहारी मंदिर, तारापोर रोड, कैंप, पुणे
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'harinam-diksha-2026.ics';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function getCleanShareLink() {
+      if (currentToken) {
+        return `${window.location.origin}/i/${currentToken}`;
+      }
+      return window.location.href;
+    }
+
+    function shareViaWhatsApp(phone, customText) {
+      const link = getCleanShareLink();
+      const msg = customText || `हरे कृष्ण! 🙏\n\nप्रिय ${currentDevoteeName} जी,\n\nआपको *श्री हरिनाम दीक्षा समारोह* के इस पावन अवसर पर सादर आमंत्रित किया जाता है।\n\n📅 दिनांक: 03 अक्टूबर 2026\n📍 स्थान: श्री राधा कुंजबिहारी मंदिर, कैंप, पुणे\n\n🪷 आपका पावन निमंत्रण दर्शन लिंक:\n${link}`;
+      const cleanPhone = phone ? phone.replace(/[^0-9]/g, '') : '';
+      const url = cleanPhone
+        ? `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(msg)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+
+      if (currentToken) {
+        db.collection('participants').doc(currentToken).update({
+          shares: firebase.firestore.FieldValue.increment(1)
+        }).catch(()=>{});
+      }
+    }
+
+    function copyInvitationLink() {
+      navigator.clipboard.writeText(getCleanShareLink());
+      showToast('निमंत्रण लिंक कॉपी हो गया ✓');
+    }
+
+    async function triggerNativeShare() {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'श्री हरिनाम दीक्षा समारोह',
+            text: 'हरे कृष्ण! श्री हरिनाम दीक्षा समारोह का पावन निमंत्रण:',
+            url: getCleanShareLink()
+          });
+        } catch(e) {}
+      } else {
+        copyInvitationLink();
+      }
+    }
+
+    function handleReferralSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('ref-name').value.trim();
+      const phone = document.getElementById('ref-phone').value.trim();
+      if (!name) return;
+
+      const link = getCleanShareLink();
+      const customMsg = `हरे कृष्ण ${name} जी! 🙏\n\nआपको *श्री हरिनाम दीक्षा समारोह* का पावन निमंत्रण भेजा जा रहा है:\n${link}`;
+      shareViaWhatsApp(phone, customMsg);
+      document.getElementById('ref-name').value = '';
+      document.getElementById('ref-phone').value = '';
+    }
+
+    function openVideoModal(vidId) {
+      const modal = document.getElementById('yt-modal');
+      const iframe = document.getElementById('yt-iframe');
+      iframe.src = `https://www.youtube.com/embed/${vidId}?autoplay=1`;
+      modal.classList.remove('hidden');
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById('yt-modal');
+      const iframe = document.getElementById('yt-iframe');
+      iframe.src = '';
+      modal.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
