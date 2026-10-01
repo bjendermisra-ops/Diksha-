@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>दीक्षा प्रबंधन</title>
+<meta name="theme-color" content="#07151d">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07151d;--c1:#0d2028;--c2:#13252c;--c3:#182d35;--g:#d6a94a;--g2:#f0c866;--t:#fff8e8;--t2:#d7cdb9;--ok:#43b982;--bad:#e35d63;--w:#e8a93a;--ln:rgba(214,169,74,.28)}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Noto Sans Devanagari',sans-serif;font-size:17px;line-height:1.55;background:var(--bg);color:var(--t);padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+h2,h3{font-family:'Rozha One',serif;font-weight:400;color:var(--g2)}h2{font-size:24px;margin:6px 0 12px}h3{font-size:21px;margin-bottom:6px}h4{font-size:17px;color:var(--g2);margin:14px 0 6px}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer;border:0;background:none}
+.ic{width:1.3em;height:1.3em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:var(--c1);border-bottom:1px solid var(--ln)}
+.top b{font-family:'Rozha One',serif;font-weight:400;font-size:20px;color:var(--g2);display:flex;gap:8px;align-items:center}
+main{max-width:760px;margin:0 auto;padding:14px}
+.card{background:var(--c2);border:1px solid var(--ln);border-radius:20px;padding:16px;margin-bottom:14px}
+.card.new{border-color:var(--w);box-shadow:0 0 0 1px var(--w)}
+.kp{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.kp div{background:var(--c2);border:1px solid var(--ln);border-radius:18px;padding:12px 14px}
+.kp b{display:block;font-size:30px;line-height:1.2;color:var(--g2)}.kp small,small,.sm{color:var(--t2);font-size:15px}
+.fn{display:grid;gap:10px}.fn div{display:grid;grid-template-columns:110px 1fr 54px;gap:8px;align-items:center;font-size:16px}
+.bar{height:10px;border-radius:9px;background:#0a1a21;overflow:hidden;margin:6px 0}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--g),var(--ok));min-width:2px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:10px 14px;border-radius:14px;background:var(--c3);border:1px solid var(--ln);font-weight:600;font-size:16px;text-align:center}
+.btn.ok{background:#1faa57;border-color:#1faa57;color:#fff}.btn.gold{background:linear-gradient(90deg,#b88e3e,#e2c383);color:#1a1205;border:0}.btn.dng{color:var(--bad)}.btn:disabled{opacity:.4}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.stack{display:grid;gap:10px}
+.act{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;background:var(--c3);border:1px solid var(--ln);border-radius:14px;padding:12px 14px;margin-bottom:8px;font-size:16px}
+.act b{font-size:24px;color:var(--g2);margin-left:10px}
+input,select,textarea{width:100%;min-height:52px;background:var(--bg);border:1.5px solid var(--ln);border-radius:14px;padding:0 14px;font-size:17px;color:var(--t)}input:focus,select:focus{outline:none;border-color:var(--g)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0;scrollbar-width:none}.chip{white-space:nowrap;padding:8px 14px;border-radius:99px;background:var(--c2);border:1px solid var(--ln);font-size:15px}.chip.on{background:var(--g);color:#1a1205;font-weight:700}
+.row{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--c2);border:1px solid var(--ln);border-radius:18px;padding:12px;margin-bottom:10px}
+.av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--g),#f3e3b6);color:#1a1205;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:20px;flex:none}
+.rm{flex:1;min-width:0}.rm b{display:block;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ag{font-size:13px;color:var(--t2);white-space:nowrap}
+.bd{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}.b{font-style:normal;font-size:13px;padding:1px 9px;border-radius:99px;background:#22373f;color:var(--t2)}.b.ok{background:#153d2e;color:#7fe0b0}.b.w{background:#4a3513;color:#ffd27a}.b.r{background:#4a1d20;color:#ff9da2}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.g2 div{background:var(--bg);border-radius:12px;padding:8px 12px}.g2 small{display:block;font-size:13px}.g2 b{font-size:16px}
+.ch{display:inline-block;margin:0 6px 6px 0;padding:4px 12px;border-radius:99px;background:var(--bg);border:1px solid var(--ln);font-size:15px}
+.empty{text-align:center;color:var(--t2);padding:30px 0}
+pre.pv{white-space:pre-wrap;font:inherit;font-size:15px;background:var(--bg);border-radius:12px;padding:12px;margin:10px 0;max-height:190px;overflow:auto;color:var(--t2)}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(7,21,29,.97);border-top:1px solid var(--ln);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.tabs button{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:14px;min-height:54px;justify-content:center;color:var(--t2);position:relative}.tabs .ic{width:25px;height:25px}.tabs .on{color:var(--g2);font-weight:700}
+.tabs i{position:absolute;top:2px;right:26%;background:var(--bad);color:#fff;border-radius:99px;font-size:12px;font-style:normal;padding:0 6px}
+.ov{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.8);display:none;align-items:flex-end;justify-content:center}.ov.show{display:flex}
+.sh{width:100%;max-width:560px;max-height:92vh;overflow:auto;background:var(--c1);border:1px solid var(--g);border-radius:26px 26px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom));position:relative}
+.x{position:absolute;right:10px;top:10px;width:44px;height:44px;display:grid;place-items:center;color:var(--g)}
+#login{align-items:center;background:var(--bg)}#login .sh{border-radius:26px;margin:16px;text-align:center}
+.toast{position:fixed;top:16px;left:50%;transform:translate(-50%,-150%);z-index:99;background:var(--c2);border:1px solid var(--g);padding:10px 20px;border-radius:99px;transition:transform .3s;max-width:92vw;font-size:16px}.toast.show{transform:translate(-50%,0)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="lotus" viewBox="0 0 24 24"><path d="M12 3c2.6 3 3.6 6.2 0 11-3.6-4.8-2.6-8 0-11zM12 14C8 14 4.6 11.6 3 8c4 0 7 1.6 9 6zM12 14c4 0 7.4-2.4 9-6-4 0-7 1.6-9 6zM3.5 15.5c2.5 3 5.5 4.5 8.5 4.5s6-1.5 8.5-4.5"/></symbol>
+<symbol id="home" viewBox="0 0 24 24"><path d="M3 10.500 12 3l9 7.500V21H3zM9 21v-7h6v7"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M23 21v-2a4 4 0 0 0-3-3.870M16 3.130a4 4 0 0 1 0 7.750"/><circle cx="9" cy="7" r="4"/></symbol>
+<symbol id="chat" viewBox="0 0 24 24"><path d="M7.900 20A9 9 0 1 0 4 16.100L2 22z"/></symbol>
+<symbol id="more" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+<symbol id="out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+<symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="up" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></symbol>
+<symbol id="dn" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+<symbol id="link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.540.540l3-3a5 5 0 0 0-7.070-7.070l-1.720 1.710M14 11a5 5 0 0 0-7.540-.540l-3 3a5 5 0 0 0 7.070 7.070l1.710-1.710"/></symbol>
+<symbol id="x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.300-4.300"/></symbol>
+</svg>
+
+<div class="toast" id="toast"></div>
+
+<div class="ov show" id="login"><div class="sh">
+  <svg class="ic" style="width:48px;height:48px;color:var(--g)"><use href="#lotus"/></svg>
+  <h3 style="margin:8px 0 14px">दीक्षा प्रबंधन</h3>
+  <form class="stack" onsubmit="login(event)">
+    <input id="em" type="email" placeholder="व्यवस्थापक ईमेल" required autocomplete="username">
+    <input id="pw" type="password" placeholder="पासवर्ड" required autocomplete="current-password">
+    <p id="le" class="sm hidden" style="color:var(--bad)">ईमेल या पासवर्ड सही नहीं है।</p>
+    <button class="btn gold" id="lb" type="submit">प्रवेश करें</button>
+  </form>
+</div></div>
+
+<header class="top"><b><svg class="ic"><use href="#lotus"/></svg>दीक्षा प्रबंधन</b><button onclick="auth.signOut()" aria-label="लॉगआउट"><svg class="ic"><use href="#out"/></svg></button></header>
+
+<main>
+  <section id="t-dash"></section>
+  <section id="t-list" class="hidden">
+    <div style="position:relative"><input id="q" placeholder="नाम या नंबर खोजें" oninput="rList()" style="padding-left:44px"><svg class="ic" style="position:absolute;left:14px;top:14px;color:var(--t2)"><use href="#search"/></svg></div>
+    <div class="chips" id="chips"></div>
+    <button class="btn ok" style="width:100%;margin-bottom:12px" onclick="startQueue(seg,seg==='unopened'?'open':seg==='incomplete'?'prep':'invite')"><svg class="ic"><use href="#chat"/></svg>इस सूची को WhatsApp भेजें</button>
+    <div id="list"></div>
+  </section>
+  <section id="t-msgs" class="hidden"></section>
+  <section id="t-more" class="hidden">
+    <h2>और विकल्प</h2>
+    <div class="stack">
+      <button class="btn gold" onclick="form()"><svg class="ic"><use href="#plus"/></svg>नया भक्त जोड़ें</button>
+      <button class="btn" onclick="csvOpen()"><svg class="ic"><use href="#up"/></svg>CSV इम्पोर्ट</button>
+      <button class="btn" onclick="exportCsv()"><svg class="ic"><use href="#dn"/></svg>पूरी सूची CSV में डाउनलोड करें</button>
+      <button class="btn" onclick="cp(BASE)"><svg class="ic"><use href="#link"/></svg>लाइव पेज का लिंक कॉपी करें</button>
+    </div>
+    <p class="sm" style="margin-top:16px">बेल्ट नंबर और प्रभुजी/माताजी भक्त की सूची में जोड़ते ही उसके निमंत्रण पेज पर दिखने लगते हैं।</p>
+  </section>
+</main>
+
+<nav class="tabs">
+  <button id="n-dash" class="on" onclick="go('dash')"><svg class="ic"><use href="#home"/></svg>डैशबोर्ड</button>
+  <button id="n-list" onclick="go('list')"><svg class="ic"><use href="#users"/></svg>भक्त</button>
+  <button id="n-msgs" onclick="go('msgs')"><svg class="ic"><use href="#chat"/></svg>संदेश<i id="nb" class="hidden"></i></button>
+  <button id="n-more" onclick="go('more')"><svg class="ic"><use href="#more"/></svg>और</button>
+</nav>
+
+<div class="ov" id="sh" onclick="if(event.target===this)closeSheet()"><div class="sh"><button class="x" onclick="closeSheet()" aria-label="बंद करें"><svg class="ic"><use href="#x"/></svg></button><div id="shc"></div></div></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+firebase.initializeApp({apiKey:"AIzaSyASMDZyfcAjg5Nb1GAwQqkufvAdqZfy2us",authDomain:"diksha-invitation.firebaseapp.com",projectId:"diksha-invitation",storageBucket:"diksha-invitation.firebasestorage.app",messagingSenderId:"720673907233",appId:"1:720673907233:web:6a3e5a0fd49012e1177960"});
+const db=firebase.firestore(),auth=firebase.auth(),F=()=>firebase.firestore.FieldValue;
+const EVENT=new Date("2026-10-03T04:30:00+05:30").getTime(),CLEAN=false,BASE=location.href.replace(/[?#].*$/,'').replace(/[^\/]*$/,'');
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ts=v=>v&&v.toMillis?v.toMillis():0;
+const ago=m=>{if(!m)return'';const s=(Date.now()-m)/1e3;return s<60?'अभी':s<3600?Math.floor(s/60)+' मिनट पहले':s<86400?Math.floor(s/3600)+' घंटे पहले':Math.floor(s/86400)+' दिन पहले'};
+const dt=m=>new Date(m).toLocaleString('hi-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+const norm=p=>{let d=String(p||'').replace(/\D/g,'');if(d.length===10)d='91'+d;else if(d.length===11&&d[0]==='0')d='91'+d.slice(1);return d};
+const link=(id,l)=>BASE+(CLEAN?'i/'+id:'?t='+id)+(l==='en'?(CLEAN?'?l=en':'&l=en'):'');
+const tok=()=>'DK-'+Array.from(crypto.getRandomValues(new Uint8Array(8))).map(b=>'abcdefghjkmnpqrstuvwxyz23456789'[b%31]).join('');
+const sal=p=>p.gender==='m'?'प्रभुजी':p.gender==='f'?'माताजी':'जी';
+const cl=p=>(p.checklist||[]).length,tot=p=>p.checklistTotal||(p.gender==='f'?5:6);
+const EVT={map:'रास्ता (Map) देखा',cal:'कैलेंडर में जोड़ा',video:'वीडियो चलाया',yt:'YouTube खोला',shares:'निमंत्रण शेयर किया',checklist:'तैयारी भरी',ready:'"मैं तैयार हूँ" दबाया',open:'निमंत्रण खोला',msg:'संदेश भेजा',referral:'किसी को आमंत्रित किया'};
+const SEG={all:['सभी',p=>true],unsent:['भेजा नहीं',p=>!p.waSent],unopened:['खोला नहीं',p=>!(p.opens>0)],incomplete:['तैयारी अधूरी',p=>p.opens>0&&!p.ready],ready:['तैयार ✓',p=>!!p.ready],off:['निष्क्रिय',p=>p.active===false]};
+const T={
+ invite:p=>`हरे कृष्ण! दंडवत प्रणाम 🙏\n\nप्रिय ${p.name} ${sal(p)},\nआपकी हरिनाम दीक्षा का पावन दिन:\n📅 03 अक्टूबर 2026, सुबह 04:30 बजे\n📍 श्री राधा कुंजबिहारी मंदिर, कैंप, पुणे\n\nआपका व्यक्तिगत निमंत्रण:\n${link(p.id,p.lang)}`,
+ open:p=>`हरे कृष्ण ${p.name} ${sal(p)} 🙏\nकृपया अपना निमंत्रण खोलकर सभी निर्देश ध्यान से पढ़ लें:\n${link(p.id,p.lang)}`,
+ prep:p=>`हरे कृष्ण ${p.name} ${sal(p)} 🙏\nआपकी तैयारी ${cl(p)}/${tot(p)} पूरी है। कृपया बाकी तैयारियाँ पूरी करके पुष्टि करें:\n${link(p.id,p.lang)}`,
+ hello:p=>`हरे कृष्ण ${p.name} ${sal(p)} 🙏\n`
+};
+const salE=p=>p.gender==='m'?'Prabhuji':p.gender==='f'?'Mataji':'';
+const nE=p=>(p.nameEn||(/[\u0900-\u097F]/.test(p.name||'')?'':p.name)||'').trim();
+const dE=p=>'Dear '+((nE(p)+' '+salE(p)).trim()||'Devotee')+',';
+const TE={
+ invite:p=>`Hare Krishna! Dandavat pranams 🙏\n\n${dE(p)}\nThe auspicious day of your Harinam initiation is near:\n📅 3 October 2026, 4:30 AM\n📍 Sri Radha Kunjabihari Mandir, Camp, Pune\n\nYour personal invitation:\n${link(p.id,p.lang)}`,
+ open:p=>`Hare Krishna 🙏\n${dE(p)}\nPlease open your invitation and read all the instructions carefully:\n${link(p.id,p.lang)}`,
+ prep:p=>`Hare Krishna 🙏\n${dE(p)}\nYour preparation is ${cl(p)}/${tot(p)} complete. Please finish the rest and confirm:\n${link(p.id,p.lang)}`,
+ hello:p=>`Hare Krishna 🙏\n${dE(p)}\n`
+};
+const tp=(k,p)=>(p.lang==='en'?TE:T)[k](p);
+let P=[],M=[],seg='all',tab='dash',queue=[],qi=0,tpl='invite',cur=null,csvRows=[],started=false;
+
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2600)}
+function sheet(h){$('shc').innerHTML=h;$('sh').classList.add('show')}
+function closeSheet(){$('sh').classList.remove('show')}
+function cp(t){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(()=>{const i=document.createElement('input');i.value=t;document.body.appendChild(i);i.select();document.execCommand('copy');i.remove()}).finally(()=>toast('कॉपी हो गया ✓'))}
+function go(t){tab=t;['dash','list','msgs','more'].forEach(k=>{$('t-'+k).classList.toggle('hidden',k!==t);$('n-'+k).classList.toggle('on',k===t)});window.scrollTo(0,0);render()}
+
+/* Auth */
+auth.onAuthStateChanged(u=>{$('login').classList.toggle('show',!u);if(u&&!started){started=true;listen()}});
+async function login(e){e.preventDefault();const b=$('lb');b.disabled=true;b.textContent='जाँच हो रही है...';$('le').classList.add('hidden');
+  try{await auth.signInWithEmailAndPassword($('em').value.trim(),$('pw').value)}catch(x){$('le').classList.remove('hidden')}
+  b.disabled=false;b.textContent='प्रवेश करें'}
+function listen(){
+  db.collection('participants').onSnapshot(s=>{P=s.docs.map(d=>({id:d.id,...d.data()}));render()},()=>toast('डेटा नहीं मिला: Firestore rules जाँचें'));
+  db.collection('messages').orderBy('at','desc').limit(200).onSnapshot(s=>{M=s.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{});
+}
+function render(){rDash();rList();rMsgs();const n=M.filter(m=>m.status==='new').length;$('nb').textContent=n;$('nb').classList.toggle('hidden',!n)}
+
+/* Dashboard */
+function rDash(){
+  const n=P.length,cnt=f=>P.filter(f).length,opened=cnt(p=>p.opens>0),sent=cnt(p=>p.waSent),st=cnt(p=>cl(p)>0),rd=cnt(p=>p.ready);
+  const C=k=>P.reduce((a,p)=>a+((p.clicks||{})[k]||0),0),nm=M.filter(m=>m.status==='new').length;
+  const d=Math.max(0,EVENT-Date.now()),fn=[['जोड़े गए',n],['WhatsApp भेजा',sent],['निमंत्रण खोला',opened],['तैयारी शुरू',st],['"तैयार हूँ" ✓',rd]];
+  const A=[[cnt(p=>p.active!==false&&!p.waSent),'WhatsApp भेजना बाकी',"startQueue('unsent','invite')"],[cnt(p=>p.active!==false&&p.waSent&&!(p.opens>0)),'भेजा, पर खोला नहीं',"startQueue('unopened','open')"],[cnt(p=>p.active!==false&&p.opens>0&&!p.ready),'खोला, पर तैयारी अधूरी',"startQueue('incomplete','prep')"],[nm,'नए संदेश',"go('msgs')"]].filter(a=>a[0]>0);
+  const live=P.filter(p=>ts(p.lastSeen)).sort((a,b)=>ts(b.lastSeen)-ts(a.lastSeen)).slice(0,8);
+  $('t-dash').innerHTML=`
+  <div class="card"><small>दीक्षा में शेष</small><b style="font-size:28px;color:var(--g2);display:block">${Math.floor(d/864e5)} दिन ${Math.floor(d%864e5/36e5)} घंटे</b></div>
+  <div class="kp"><div><small>कुल भक्त</small><b>${n}</b></div><div><small>तैयार ✓</small><b>${rd}</b></div><div><small>कुल बार खोला</small><b>${P.reduce((a,p)=>a+(p.opens||0),0)}</b></div><div><small>नए संदेश</small><b>${nm}</b></div></div>
+  <h2>अभी क्या करना है</h2>${A.length?A.map(a=>`<button class="act" onclick="${a[2]}"><span>${a[1]}</span><b>${a[0]}</b></button>`).join(''):'<p class="empty">सब ठीक है 🙏</p>'}
+  <h2>प्रगति</h2><div class="card fn">${fn.map(([l,v])=>`<div><span>${l}</span><span class="bar"><span style="width:${n?v/n*100:0}%"></span></span><b>${v}</b></div>`).join('')}</div>
+  <h2>भक्त कहाँ क्लिक कर रहे हैं</h2><div class="kp"><div><small>रास्ता (Map)</small><b>${C('map')}</b></div><div><small>कैलेंडर</small><b>${C('cal')}</b></div><div><small>वीडियो</small><b>${C('video')}</b></div><div><small>YouTube चैनल</small><b>${C('yt')}</b></div><div><small>शेयर</small><b>${P.reduce((a,p)=>a+(p.shares||0),0)}</b></div></div>
+  <h2>ताज़ा गतिविधि</h2>${live.length?live.map(p=>`<button class="row" onclick="openP('${esc(p.id)}')"><i class="av">${esc((p.name||'?').trim()[0])}</i><div class="rm"><b>${esc(p.name)}</b><small>${EVT[p.lastEvent]||'सक्रिय'}</small></div><small class="ag">${ago(ts(p.lastSeen))}</small></button>`).join(''):'<p class="empty">अभी किसी ने निमंत्रण नहीं खोला</p>'}`;
+}
+
+/* Devotees */
+function badges(p){const nm=M.some(m=>m.pid===p.id&&m.status==='new');return (p.waSent?'<em class="b ok">भेजा</em>':'<em class="b">भेजा नहीं</em>')+(p.opens>0?`<em class="b ok">खोला ${p.opens}×</em>`:'<em class="b w">खोला नहीं</em>')+(p.ready?'<em class="b ok">तैयार ✓</em>':p.opens>0?`<em class="b w">तैयारी ${cl(p)}/${tot(p)}</em>`:'')+(nm?'<em class="b r">नया संदेश</em>':'')+(p.active===false?'<em class="b r">निष्क्रिय</em>':'')}
+function rList(){
+  const q=($('q').value||'').toLowerCase().trim();
+  $('chips').innerHTML=Object.entries(SEG).map(([k,[l,f]])=>`<button class="chip ${seg===k?'on':''}" onclick="seg='${k}';rList()">${l} ${P.filter(f).length}</button>`).join('');
+  const L=P.filter(SEG[seg][1]).filter(p=>!q||(p.name||'').toLowerCase().includes(q)||(p.phone||'').includes(q)).sort((a,b)=>ts(b.lastSeen)-ts(a.lastSeen)||(a.name||'').localeCompare(b.name||''));
+  $('list').innerHTML=L.length?L.map(p=>`<button class="row" onclick="openP('${esc(p.id)}')"><i class="av">${esc((p.name||'?').trim()[0])}</i><div class="rm"><b>${esc(p.name)}</b><small>${esc(p.phone||'-')}${p.belt?' • बेल्ट '+esc(p.belt):''}</small><div class="bd">${badges(p)}</div></div><small class="ag">${ago(ts(p.lastSeen))}</small></button>`).join(''):'<p class="empty">कोई भक्त नहीं मिला</p>';
+}
+function openP(id){
+  const p=P.find(x=>x.id===id);if(!p)return;cur=p;
+  const ev=Object.entries(p.clicks||{}).filter(([k,v])=>v>0&&EVT[k]),ms=M.filter(m=>m.pid===id).slice(0,3),t=tot(p);
+  sheet(`<h3>${esc(p.name)} ${sal(p)}</h3><p class="sm">${esc(p.phone||'')}${p.belt?' • बेल्ट '+esc(p.belt):' • बेल्ट नंबर नहीं'}</p>
+  <div class="g2"><div><small>पहली बार खोला</small><b>${ts(p.firstOpen)?dt(ts(p.firstOpen)):'अभी नहीं'}</b></div><div><small>आख़िरी गतिविधि</small><b>${ts(p.lastSeen)?ago(ts(p.lastSeen)):'—'}</b></div><div><small>कुल बार खोला</small><b>${p.opens||0}</b></div><div><small>डिवाइस</small><b>${p.device==='mobile'?'मोबाइल':p.device==='desktop'?'कंप्यूटर':'—'}</b></div></div>
+  <small>तैयारी ${cl(p)}/${t}${p.ready?' • "मैं तैयार हूँ" ✓':''}</small><div class="bar"><span style="width:${cl(p)/t*100}%"></span></div>
+  <h4>क्लिक और गतिविधि</h4>${ev.length?ev.map(([k,v])=>`<span class="ch">${EVT[k]} ×${v}</span>`).join(''):'<p class="sm">अभी कोई क्लिक नहीं</p>'}
+  ${ms.length?'<h4>इनके संदेश</h4>'+ms.map(m=>`<pre class="pv">${esc(m.text)}</pre>`).join(''):''}
+  <div class="acts"><button class="btn ok" onclick="wa(cur,'invite')">निमंत्रण भेजें</button>${p.opens>0?`<button class="btn" onclick="wa(cur,'prep')">तैयारी याद दिलाएँ</button>`:`<button class="btn" onclick="wa(cur,'open')">खोलने को कहें</button>`}
+  <a class="btn" href="tel:+${norm(p.phone)}">कॉल करें</a><button class="btn" onclick="cardShare()">फोटो कार्ड भेजें</button>
+  <button class="btn" onclick="cp(link(cur.id,cur.lang))">लिंक कॉपी</button><button class="btn" onclick="form(cur)">संपादित करें</button>
+  <button class="btn" onclick="togP()">${p.active===false?'सक्रिय करें':'निष्क्रिय करें'}</button><button class="btn dng" onclick="delP()">हटाएँ</button></div>`);
+}
+function wa(p,t){
+  const ph=norm(p.phone);if(ph.length<12)return toast('सही मोबाइल नंबर नहीं है');
+  window.open('https://wa.me/'+ph+'?text='+encodeURIComponent(tp(t,p)),'_blank');
+  const u={lastContact:F().serverTimestamp(),contacts:F().increment(1)};if(t==='invite')u.waSent=true;
+  db.collection('participants').doc(p.id).update(u).catch(()=>{});
+}
+function togP(){db.collection('participants').doc(cur.id).update({active:cur.active===false}).then(()=>{closeSheet();toast('बदल दिया ✓')})}
+function delP(){if(confirm(cur.name+' को हटाएँ? यह वापस नहीं होगा।'))db.collection('participants').doc(cur.id).delete().then(()=>{closeSheet();toast('हटा दिया')})}
+
+/* Queue */
+function startQueue(sg,t){queue=P.filter(p=>p.active!==false&&SEG[sg][1](p)&&norm(p.phone).length>=12);qi=0;tpl=t;if(!queue.length)return toast('कोई भक्त नहीं मिला');qView()}
+function qView(){
+  if(qi>=queue.length){closeSheet();return toast('कतार पूरी हुई ✓')}
+  const p=queue[qi];
+  sheet(`<h3>WhatsApp कतार ${qi+1} / ${queue.length}</h3><div class="bar"><span style="width:${(qi+1)/queue.length*100}%"></span></div><p><b>${esc(p.name)}</b> <small>${esc(p.phone)}</small></p><pre class="pv">${esc(tp(tpl,p))}</pre>
+  <div class="acts"><button class="btn ok" style="grid-column:1/3" onclick="qSend()">WhatsApp खोलें और अगला →</button><button class="btn" onclick="qi++;qView()">छोड़ें</button><button class="btn" onclick="closeSheet()">बंद करें</button></div>`);
+}
+function qSend(){wa(queue[qi],tpl);qi++;qView()}
+
+/* Messages */
+function rMsgs(){
+  $('t-msgs').innerHTML='<h2>भक्तों के संदेश</h2>'+(M.length?M.map(m=>{const p=P.find(x=>x.id===m.pid)||{};return `<div class="card ${m.status==='new'?'new':''}"><b>${esc(m.name||p.name||'भक्त')}</b> <small>${ago(ts(m.at))}</small><p style="margin:6px 0">${esc(m.text)}</p><div class="acts">${(m.phone||p.phone)?`<button class="btn ok" onclick="replyM('${m.id}')">WhatsApp जवाब</button>`:''}${m.status==='new'?`<button class="btn" onclick="doneM('${m.id}')">हो गया ✓</button>`:'<small>निपटाया गया</small>'}</div></div>`}).join(''):'<p class="empty">अभी कोई संदेश नहीं</p>');
+}
+function replyM(id){const m=M.find(x=>x.id===id),p=P.find(x=>x.id===m.pid)||{},ph=norm(m.phone||p.phone);if(ph.length<12)return toast('नंबर नहीं मिला');window.open('https://wa.me/'+ph+'?text='+encodeURIComponent(tp('hello',{...p,name:m.name||p.name||'भक्त'})),'_blank');doneM(id)}
+function doneM(id){db.collection('messages').doc(id).update({status:'done'}).catch(()=>toast('अपडेट नहीं हुआ'))}
+
+/* Add / edit */
+function form(p){p=p||{};sheet(`<h3>${p.id?'संपादित करें':'नया भक्त'}</h3><div class="stack"><input id="fn" placeholder="पूरा नाम *" value="${esc(p.name||'')}"><input id="fp" type="tel" inputmode="numeric" placeholder="मोबाइल नंबर *" value="${esc(p.phone||'')}"><input id="fb" placeholder="बेल्ट नंबर (बाद में भी भर सकते हैं)" value="${esc(p.belt||'')}"><input id="fe" placeholder="Name in English (for the English page)" value="${esc(p.nameEn||'')}"><select id="fl"><option value="hi">पेज की भाषा: हिन्दी</option><option value="en" ${p.lang==='en'?'selected':''}>Page language: English</option></select><select id="fg"><option value="">प्रभुजी / माताजी चुनें</option><option value="m" ${p.gender==='m'?'selected':''}>प्रभुजी (पुरुष)</option><option value="f" ${p.gender==='f'?'selected':''}>माताजी (महिला)</option></select><button class="btn gold" onclick="saveP('${esc(p.id||'')}')">सहेजें</button></div>`)}
+async function saveP(id){
+  const name=$('fn').value.trim(),phone=$('fp').value.trim(),belt=$('fb').value.trim(),gender=$('fg').value,nameEn=$('fe').value.trim(),lang=$('fl').value;
+  if(!name||norm(phone).length<12)return toast('नाम और 10 अंक का नंबर ज़रूरी है');
+  const dup=P.find(x=>x.id!==id&&norm(x.phone)===norm(phone));if(dup)return toast('यह नंबर '+dup.name+' के नाम से पहले से है');
+  try{if(id)await db.collection('participants').doc(id).update({name,phone,belt,gender,nameEn,lang});else await db.collection('participants').doc(tok()).set({name,phone,belt,gender,nameEn,lang,active:true,waSent:false,opens:0,shares:0,createdAt:F().serverTimestamp()});closeSheet();toast('सहेज लिया ✓')}catch(e){toast('सहेजा नहीं जा सका')}
+}
+
+/* CSV */
+function csvLine(l){const r=[];let c='',q=false;for(const ch of l){if(ch=='"')q=!q;else if(ch==','&&!q){r.push(c.trim());c=''}else c+=ch}r.push(c.trim());return r}
+function csvOpen(){sheet(`<h3>CSV इम्पोर्ट</h3><p class="sm" style="margin-bottom:10px">कॉलम क्रम: नाम, मोबाइल, बेल्ट, m/f, English name, hi/en (पहले दो ज़रूरी, बाकी वैकल्पिक)</p><div class="stack"><input type="file" accept=".csv,text/csv" onchange="csvRead(event)" style="padding-top:12px"><p id="cs" class="sm"></p><button id="cb" class="btn gold" disabled onclick="csvGo()">इम्पोर्ट करें</button></div>`)}
+function csvRead(e){
+  const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{const seen=new Set(P.map(p=>norm(p.phone)));let bad=0,dup=0;csvRows=[];
+    r.result.replace(/^\ufeff/,'').split(/\r?\n/).forEach((l,i)=>{if(!l.trim())return;const c=csvLine(l);if(i===0&&/name|नाम/i.test(c[0]))return;const ph=norm(c[1]);if(!c[0]||ph.length<12){bad++;return}if(seen.has(ph)){dup++;return}seen.add(ph);const g=(c[3]||'').toLowerCase();csvRows.push({name:c[0],phone:c[1],belt:c[2]||'',nameEn:c[4]||'',lang:/^en/i.test(c[5]||'')?'en':'hi',gender:/^(f|mataji|mahila|माता|महिला)/.test(g)?'f':/^(m|p|prabhu|प्र|पुरुष)/.test(g)?'m':''})});
+    $('cs').textContent=`वैध ${csvRows.length} • पहले से मौजूद ${dup} • गलत ${bad}`;$('cb').disabled=!csvRows.length};
+  r.readAsText(f);
+}
+async function csvGo(){
+  $('cb').disabled=true;$('cb').textContent='सेव हो रहा है...';
+  try{for(let i=0;i<csvRows.length;i+=400){const b=db.batch();csvRows.slice(i,i+400).forEach(d=>b.set(db.collection('participants').doc(tok()),{...d,active:true,waSent:false,opens:0,shares:0,createdAt:F().serverTimestamp()}));await b.commit()}closeSheet();toast(csvRows.length+' भक्त जुड़ गए ✓')}catch(e){toast('इम्पोर्ट में त्रुटि');$('cb').disabled=false;$('cb').textContent='इम्पोर्ट करें'}
+}
+function exportCsv(){
+  const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"',H=['नाम','मोबाइल','बेल्ट','लिंग','लिंक','WhatsApp भेजा','खोला (बार)','तैयारी','तैयार','आख़िरी गतिविधि','Map','Calendar','Video','YouTube','Shares'];
+  const R=P.map(p=>{const c=p.clicks||{};return [p.name,p.phone,p.belt,p.gender,link(p.id,p.lang),p.waSent?'हाँ':'नहीं',p.opens||0,cl(p)+'/'+tot(p),p.ready?'हाँ':'नहीं',ts(p.lastSeen)?dt(ts(p.lastSeen)):'',c.map||0,c.cal||0,c.video||0,c.yt||0,p.shares||0].map(q).join(',')});
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+[H.map(q).join(','),...R].join('\n')],{type:'text/csv;charset=utf-8'}));a.download='diksha-bhakt-list.csv';a.click();toast('डाउनलोड शुरू ✓');
+}
+
+/* Photo card */
+async function card(p){
+  const img=new Image();img.src='logo.png';await new Promise((r,j)=>{img.onload=r;img.onerror=j});
+  const c=document.createElement('canvas'),x=c.getContext('2d');c.width=img.naturalWidth;c.height=img.naturalHeight;x.drawImage(img,0,0);x.textAlign='center';x.fillStyle='#1b1208';
+  x.font=`bold ${c.width*.05}px "Noto Sans Devanagari",serif`;x.fillText(`प्रिय ${p.name} ${sal(p)}`,c.width/2,c.height*.5);
+  x.font=`${c.width*.028}px "Noto Sans Devanagari",serif`;x.fillText('03 अक्टूबर 2026 • प्रातः 04:30 बजे',c.width/2,c.height*.84);x.fillText('श्री राधा कुंजबिहारी मंदिर, कैंप, पुणे',c.width/2,c.height*.88);
+  return new Promise(r=>c.toBlob(r,'image/png'));
+}
+async function cardShare(){
+  const p=cur;
+  try{const b=await card(p),f=new File([b],'diksha-card.png',{type:'image/png'});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:tp('invite',p)});db.collection('participants').doc(p.id).update({waSent:true}).catch(()=>{});return}
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='diksha-card-'+p.id+'.png';a.click();wa(p,'invite');
+  }catch(e){toast('कार्ड नहीं बन सका (logo.png जाँचें)')}
+}
+setInterval(()=>{if(tab==='dash')rDash()},60000);
+</script>
+</body>
+</html>
