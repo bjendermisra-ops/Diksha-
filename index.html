@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>var _p=location.pathname,_i=_p.indexOf("/i/");document.write('<base href="'+(_i>-1?_p.slice(0,_i+1):_p.replace(/[^\/]*$/,""))+'">');document.documentElement.classList.add('js')</script>
+<title>श्री हरिनाम दीक्षा महोत्सव</title>
+<meta name="description" content="परम पूज्य लोकनाथ स्वामी महाराज के करकमलों से हरिनाम दीक्षा | 03 अक्टूबर 2026, पुणे">
+<meta property="og:title" content="श्री हरिनाम दीक्षा महोत्सव — पावन निमंत्रण">
+<meta property="og:description" content="परम पूज्य लोकनाथ स्वामी महाराज के करकमलों से हरिनाम दीक्षा | 03 अक्टूबर 2026, पुणे">
+<!-- TODO: पूरा https URL, अपने डोमेन की 1200x630 इमेज -->
+<meta property="og:image" content="https://diksha.toolgi.online/logo.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#07080A">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Rozha+One&family=Cormorant+Garamond:wght@600;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+<script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>
+:root{--ink:#1d1710;--sub:#4a4034;--gold:#c5a059;--gold2:#e2c383;--deep:#7a5c1e;--paper:#fcfaf6;--line:#e6dccb;--night:#07080a;--sand:#f1e9db}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Serif Devanagari',serif;font-size:18px;line-height:1.75;background:var(--night);color:var(--ink);padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+h1,h2,h3,.royal{font-family:'Rozha One','Noto Serif Devanagari',serif;font-weight:400;line-height:1.3}
+html[lang=en] body{font-family:'Lora','Noto Serif Devanagari',serif;font-size:17px;line-height:1.7}
+html[lang=en] h1,html[lang=en] h2,html[lang=en] h3,html[lang=en] .royal,html[lang=en] .guru b,html[lang=en] .cd b,html[lang=en] .live,html[lang=en] .mantra{font-family:'Cormorant Garamond',serif;font-weight:700}
+html[lang=en] .card h2{font-size:30px}html[lang=en] .hi{font-size:34px}html[lang=en] .hero h1{font-size:clamp(46px,14vw,72px);line-height:1.05}html[lang=en] .guru b{font-size:26px}html[lang=en] .cd b{font-size:38px}
+.ic{width:1.3em;height:1.3em;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.ic.f{fill:currentColor;stroke:none}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+/* language toggle */
+.lg{display:flex;background:rgba(10,10,12,.72);border:1px solid rgba(197,160,89,.5);border-radius:99px;padding:3px;backdrop-filter:blur(6px)}
+.lg button{min-width:48px;min-height:40px;padding:0 12px;border-radius:99px;font-size:15px;color:#f3e3b6;font-family:'Lora','Noto Serif Devanagari',serif}
+.lg button[aria-pressed=true]{background:var(--gold);color:#1a1205;font-weight:700}
+.lgf{position:fixed;top:max(10px,env(safe-area-inset-top));right:10px;z-index:40}
+/* intro */
+#intro{position:fixed;inset:0;z-index:80;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;background:radial-gradient(ellipse at 50% 62%,#2a1a07 0,#0b0705 55%,#050403 100%);color:#f6e7bf;transition:opacity 1.1s ease,visibility 1.1s}
+#intro.go{opacity:0;visibility:hidden}
+#intro .lg{position:absolute;top:max(14px,env(safe-area-inset-top));right:14px}
+#intro h2{font-size:42px;color:#f0dba5}html[lang=en] #intro h2{font-size:50px}
+#iname{min-height:1.7em;font-size:20px;color:#e6d3a3}
+.lamp{position:relative;width:min(68vw,270px);aspect-ratio:200/160;display:block;margin:6px 0}
+.lamp svg{width:100%;height:100%;overflow:visible;position:relative}
+.lamp:before{content:"";position:absolute;inset:-14%;border-radius:50%;border:1.5px solid rgba(226,195,131,.5);animation:png 2.4s infinite}
+.lit .lamp:before{display:none}
+.glow{position:absolute;left:50%;top:38%;width:40px;height:40px;margin:-20px;border-radius:50%;background:radial-gradient(circle,#ffe29a,#f5a623 40%,transparent 70%);opacity:0}
+.lit .glow{animation:gl 1.7s forwards}
+.fl{transform-origin:100px 92px;transform:scale(0);opacity:0}
+.lit .fl{animation:fi .6s forwards,fk 1.8s .6s infinite ease-in-out}
+#intro .ip{font-size:17px;color:#d9c79a;letter-spacing:.04em}
+.skip{position:absolute;bottom:max(22px,env(safe-area-inset-bottom));font-size:16px;color:#a99771;min-height:44px;padding:0 20px}
+@keyframes png{from{transform:scale(.75);opacity:.9}to{transform:scale(1.2);opacity:0}}
+@keyframes gl{30%{opacity:.9;transform:scale(5)}to{opacity:1;transform:scale(42)}}
+@keyframes fi{to{transform:scale(1);opacity:1}}
+@keyframes fk{50%{transform:scale(1.06,.94) rotate(-1.5deg)}}
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;padding:28px 20px 40px;background:#0b0c10;overflow:hidden;color:#fbf3df}
+.hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(#07080a 0,rgba(7,8,10,.35) 35%,rgba(7,8,10,.55) 65%,#07080a 100%)}
+.hero>*{position:relative;z-index:2}
+.hero>.hbg{position:absolute;z-index:0;inset:-5%;background:url('hero-bg.png') center/cover;animation:kb 26s ease-in-out infinite alternate}
+.hero>.sp{position:absolute;z-index:1;inset:0;overflow:hidden;pointer-events:none}
+.sp i{position:absolute;bottom:-10px;border-radius:50%;background:#f6d98b;box-shadow:0 0 8px 2px rgba(246,217,139,.7);opacity:0;animation:rise linear infinite}
+@keyframes kb{to{transform:scale(1.12) translate(-1.5%,1%)}}
+@keyframes rise{15%{opacity:.9}to{transform:translateY(-105vh) translateX(18px);opacity:0}}
+.brand{display:flex;align-items:center;gap:10px;color:var(--gold2);letter-spacing:.3em;font-size:14px}.brand .ic{width:30px;height:30px}
+html[lang=en] .brand{letter-spacing:.25em;text-transform:uppercase}
+.hero h1{font-size:clamp(40px,12vw,64px);background:linear-gradient(110deg,#c5a059 25%,#fffdf7 50%,#c5a059 75%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;margin:10px 0 20px;animation:shim 7s 2s infinite linear}
+@keyframes shim{from{background-position:150% 0}to{background-position:-50% 0}}
+.hero .lead{font-size:16px;color:#f0e2c0;letter-spacing:.06em}
+.facts{display:grid;gap:10px;width:100%;max-width:400px;margin:0 auto}
+.fact{display:flex;align-items:center;gap:14px;text-align:left;padding:13px 16px;border-radius:16px;background:rgba(10,10,12,.62);border:1px solid rgba(197,160,89,.4);backdrop-filter:blur(6px)}
+.fact .ic{color:var(--gold2);width:28px;height:28px}.fact b{display:block;font-size:19px;line-height:1.35}.fact small{font-size:15px;color:#e8d9b5}
+.play .a{animation:up .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--d,0s)}
+@keyframes up{from{opacity:0;transform:translateY(22px)}}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:12px 18px;border-radius:16px;font-weight:700;font-size:18px;transition:transform .15s;position:relative;overflow:hidden}
+.btn:active{transform:scale(.97)}
+.gold{background:linear-gradient(90deg,#b88e3e,#e2c383,#b88e3e);color:#1a1205;box-shadow:0 8px 26px rgba(197,160,89,.3)}
+.gold:after{content:"";position:absolute;top:0;left:-60%;width:35%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shn 4.5s 1.5s infinite}
+@keyframes shn{to{left:140%}}
+.ghost{border:1.5px solid var(--gold);color:var(--ink);background:#fff}.green{background:#1faa57;color:#fff}.red{background:#d42a2a;color:#fff}
+.cta{max-width:400px;margin:22px auto 0;width:100%}.quote{margin-top:14px;font-style:italic;color:#e8d9b5;font-size:17px}
+main{max-width:480px;margin:-28px auto 0;padding:0 14px;position:relative;display:grid;gap:22px}
+.js .rv{opacity:0;transform:translateY(30px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}.js .rv.in{opacity:1;transform:none}
+.card{background:var(--paper);border-radius:28px;padding:26px 20px;border:1px solid var(--line);box-shadow:0 22px 45px -12px #000,0 0 0 1px rgba(197,160,89,.3)}
+.card h2{font-size:26px;display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.card h2 .ic{color:var(--gold);width:30px;height:30px}.card p{color:var(--sub)}.center{text-align:center}.center h2{justify-content:center}
+.today{background:linear-gradient(135deg,#fff6de,#fcfaf6);border:1.5px solid var(--gold)}
+.hi{font-size:30px;margin:6px 0 8px;color:var(--ink)}
+.guru{display:flex;align-items:center;gap:16px;margin:20px 0;padding:16px 0;border-block:1px solid var(--line);text-align:left}
+.guru .ph{width:88px;height:88px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--gold),#f3e3b6);flex:none;overflow:hidden}
+.guru img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.guru b{font-family:'Rozha One',serif;font-weight:400;font-size:22px;line-height:1.35;display:block}.guru span{color:var(--deep);font-weight:600;font-size:17px}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.cd div{background:#111318;border-radius:16px;padding:12px 4px;color:#f3e3b6}
+.cd b{display:block;font-family:'Rozha One',serif;font-weight:400;font-size:34px;line-height:1.1;font-variant-numeric:tabular-nums}.cd small{font-size:15px;color:var(--gold)}
+.tk{animation:tk .45s}@keyframes tk{from{transform:translateY(-8px);opacity:.3}}
+.live{font-family:'Rozha One',serif;font-size:24px;color:var(--deep);padding:14px 0}
+.tl{list-style:none;padding:0;position:relative}.tl li{display:flex;gap:16px;padding-bottom:22px;position:relative}
+.tl li:not(:last-child):before{content:"";position:absolute;left:25px;top:52px;bottom:2px;width:2px;background:var(--line)}
+.tl .dot{width:52px;height:52px;border-radius:50%;background:var(--sand);border:1.5px solid var(--gold);display:grid;place-items:center;color:var(--deep);flex:none}
+.tl li.now .dot{background:var(--gold);color:#1a1205;animation:ring 1.6s infinite}
+@keyframes ring{from{box-shadow:0 0 0 0 rgba(197,160,89,.65)}to{box-shadow:0 0 0 14px rgba(197,160,89,0)}}
+.rv.in .tl li{animation:up .7s both}.tl li:nth-child(2){animation-delay:.15s!important}.tl li:nth-child(3){animation-delay:.3s!important}.tl li:nth-child(4){animation-delay:.45s!important}
+.tl b{font-size:20px;display:block;line-height:1.4}.tl p{font-size:17px;line-height:1.5}
+.rules{list-style:none;padding:0;display:grid;gap:10px;margin-top:6px}
+.rules li{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:17px;line-height:1.55;color:var(--ink)}
+.rules li.must{background:#fff6de;border-color:var(--gold)}.rules .ic{color:var(--deep);margin-top:3px}body.f .pm{display:none}
+.tag{display:inline-block;font-size:13px;font-weight:700;background:var(--deep);color:#fff;border-radius:99px;padding:0 10px;margin-left:6px;line-height:1.6;vertical-align:1px;font-style:normal}
+.venue{border-radius:18px;overflow:hidden;border:1px solid var(--line);margin-bottom:16px;background:var(--sand)}.venue img{width:100%;height:200px;object-fit:cover;display:block}
+.addr{display:flex;gap:10px;justify-content:center;align-items:flex-start;color:var(--ink);margin:6px 0 16px}.addr .ic{color:#c0392b;margin-top:4px}
+.stack{display:grid;gap:10px}.map{margin-top:16px;border-radius:18px;overflow:hidden;border:1px solid var(--line);height:220px;background:var(--sand)}.map iframe{width:100%;height:100%;border:0}
+.chk{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:14px;border-radius:16px;border:1.5px solid var(--line);background:#fff;font-size:18px;line-height:1.5;min-height:62px;margin-bottom:10px}
+.chk i{width:30px;height:30px;border-radius:9px;border:2px solid #b9ad97;display:grid;place-items:center;flex:none;color:#fff}.chk .ic{width:20px;height:20px;stroke-width:3;opacity:0}
+.chk.on{background:#eaf7ee;border-color:#2e9e5b}.chk.on i{background:#2e9e5b;border-color:#2e9e5b;animation:pop .4s}.chk.on .ic{opacity:1}
+@keyframes pop{50%{transform:scale(1.3)}}
+.bar{height:10px;border-radius:9px;background:var(--sand);overflow:hidden;margin:14px 0 6px}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#2e9e5b);transition:width .5s}
+.stat{font-weight:700;color:var(--deep);text-align:center;margin-bottom:14px;font-size:17px}
+.shake{animation:shk .4s}@keyframes shk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.two .btn{font-size:16px;padding:10px 6px;min-height:54px}
+input,textarea{width:100%;border:1.5px solid #cfc3ac;border-radius:14px;padding:0 16px;font:inherit;font-size:18px;color:var(--ink);background:#fff}input{min-height:56px}textarea{padding:12px 16px;resize:vertical}
+input::placeholder,textarea::placeholder{color:#7a6f5f}input:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.3)}
+.sub{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);text-align:left}.sub h3{font-size:20px;margin-bottom:12px}
+.vid{position:relative;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/10;margin:14px 0}.vid img{width:100%;height:100%;object-fit:cover;opacity:.9}
+.vid button{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;background:#d42a2a;color:#fff;display:grid;place-items:center;animation:ring 2s infinite}.vid .ic{width:30px;height:30px}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:10px}.gal img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;display:block;background:var(--sand);transition:transform .5s}.gal img:active{transform:scale(1.04)}
+.mantra{font-family:'Rozha One',serif;font-size:22px;line-height:1.7;text-align:center;border:1px solid var(--gold)}
+footer{text-align:center;color:#d9c79a;padding:28px 20px;font-size:16px}footer small{display:block;color:#a08f68;font-size:14px}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(3,1fr);background:rgba(7,8,10,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(197,160,89,.4);padding:8px 8px calc(8px + env(safe-area-inset-bottom));color:#f3e3b6}
+.dock a,.dock button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:15px;min-height:56px;justify-content:center}.dock .ic{width:26px;height:26px}
+.dock .main{color:#1a1205;background:linear-gradient(90deg,#b88e3e,#e2c383);border-radius:14px;font-weight:700}
+.ov{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.85);display:none;align-items:flex-end;justify-content:center}.ov.show{display:flex}
+.sheet{width:100%;max-width:480px;background:var(--paper);border-radius:28px 28px 0 0;padding:24px 18px calc(24px + env(safe-area-inset-bottom));animation:up .3s}.sheet h3{font-size:24px;margin-bottom:4px}
+.x{position:absolute;right:16px;top:14px;width:44px;height:44px;display:grid;place-items:center;color:#fff}
+.vm{align-items:center;padding:16px}.vm .box{position:relative;width:100%;max-width:640px}.vm iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:16px;background:#000}.vm .x{top:-56px;right:0}
+.toast{position:fixed;top:max(16px,env(safe-area-inset-top));left:50%;transform:translate(-50%,-140%);z-index:90;background:#14171f;border:1px solid var(--gold);color:#fff;padding:12px 20px;border-radius:99px;font-size:16px;display:flex;gap:8px;align-items:center;transition:transform .3s;max-width:92vw}
+.toast.show{transform:translate(-50%,0)}.toast .ic{color:var(--gold2)}
+.pt{position:fixed;top:-24px;width:12px;height:18px;border-radius:60% 0 60% 0;z-index:95;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(560deg)}}
+.hidden{display:none!important}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.js .rv{opacity:1;transform:none}.fl{transform:none;opacity:1}.sp{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="lotus" viewBox="0 0 24 24"><path d="M12 3c2.6 3 3.6 6.2 0 11-3.6-4.8-2.6-8 0-11zM12 14C8 14 4.6 11.6 3 8c4 0 7 1.6 9 6zM12 14c4 0 7.4-2.4 9-6-4 0-7 1.6-9 6zM3.5 15.5c2.5 3 5.5 4.5 8.5 4.5s6-1.5 8.5-4.5"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></symbol>
+<symbol id="share" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></symbol>
+<symbol id="chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></symbol>
+<symbol id="link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+<symbol id="play" viewBox="0 0 24 24"><path d="M7 3.5v17l14-8.5z"/></symbol>
+<symbol id="check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a2 2 0 0 0 3.4 0"/></symbol>
+<symbol id="gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol>
+<symbol id="flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+<symbol id="beads" viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><circle cx="18.5" cy="7.5" r="2"/><circle cx="19" cy="14.5" r="2"/><circle cx="14" cy="19.5" r="2"/><circle cx="7" cy="18" r="2"/><circle cx="4.5" cy="11" r="2"/><path d="M12 6v3M12 9l-1.5 3M12 9l1.5 3"/></symbol>
+<symbol id="nav" viewBox="0 0 24 24"><path d="M3 11 22 2l-9 19-2-8z"/></symbol>
+<symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+<symbol id="star" viewBox="0 0 24 24"><path d="m12 2 3 6.5 7 .8-5.200 4.800 1.500 7L12 17.500 5.700 21l1.500-7L2 9.300l7-.8z"/></symbol>
+<symbol id="phone" viewBox="0 0 24 24"><path d="M22 16.920v3a2 2 0 0 1-2.180 2 19.790 19.790 0 0 1-8.630-3.070 19.500 19.500 0 0 1-6-6 19.790 19.790 0 0 1-3.070-8.670A2 2 0 0 1 4.110 2h3a2 2 0 0 1 2 1.720c.130.960.360 1.900.700 2.810a2 2 0 0 1-.450 2.110L8.090 9.910a16 16 0 0 0 6 6l1.270-1.270a2 2 0 0 1 2.110-.450c.910.340 1.850.570 2.810.700A2 2 0 0 1 22 16.920z"/></symbol>
+</svg>
+
+<div id="intro" role="dialog" aria-modal="true">
+  <div class="lg"><button data-l="hi" aria-pressed="true" onclick="setLang('hi')">हिन्दी</button><button data-l="en" aria-pressed="false" onclick="setLang('en')">English</button></div>
+  <div><h2 class="royal" data-i="introHi">हरे कृष्ण</h2><p id="iname"></p></div>
+  <button class="lamp" id="lamp" data-a="lampA" aria-label="दीया जलाएँ">
+    <i class="glow"></i>
+    <svg viewBox="0 0 200 160" aria-hidden="true"><defs>
+      <linearGradient id="cl" x1="0" x2="1"><stop offset="0" stop-color="#7a5410"/><stop offset=".5" stop-color="#e8c97a"/><stop offset="1" stop-color="#7a5410"/></linearGradient>
+      <linearGradient id="fg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff8a00"/><stop offset="1" stop-color="#ffd36a"/></linearGradient></defs>
+      <path d="M14 96c0 36 38 56 86 56s86-20 86-56z" fill="url(#cl)"/><ellipse cx="100" cy="96" rx="86" ry="12" fill="#f3d98d"/><ellipse cx="100" cy="96" rx="70" ry="8" fill="#5a3b0c"/>
+      <path d="M96 94c0-8 3-13 4-14 1 1 4 6 4 14z" fill="#2b1a0c"/>
+      <g class="fl"><path d="M100 84c-16-14-14-32 0-58 14 26 16 44 0 58z" fill="url(#fg)"/><path d="M100 82c-7-8-6-19 0-30 6 11 7 22 0 30z" fill="#fff6c8"/></g></svg>
+  </button>
+  <p class="ip" data-i="introTap">दीया जलाकर निमंत्रण खोलें</p>
+  <button class="skip" onclick="openIntro()" data-i="skip">छोड़ें</button>
+</div>
+<script>setTimeout(function(){if(!window.__ok){var i=document.getElementById("intro");if(i)i.remove()}},4000)</script>
+
+<div class="lg lgf"><button data-l="hi" aria-pressed="true" onclick="setLang('hi')">हिन्दी</button><button data-l="en" aria-pressed="false" onclick="setLang('en')">English</button></div>
+<div class="toast" id="toast" role="status"><svg class="ic"><use href="#check"/></svg><span id="toast-t"></span></div>
+
+<div id="off" class="hidden" style="min-height:100vh;display:grid;place-items:center;padding:24px"><div class="card center"><svg class="ic" style="width:48px;height:48px;color:var(--gold)"><use href="#lotus"/></svg><h2 style="justify-content:center;border:0" data-i="offH">हरे कृष्ण</h2><p data-i="offP"></p></div></div>
+
+<div id="app">
+<section class="hero">
+  <div class="hbg"></div><div class="sp"></div>
+  <div class="brand a"><svg class="ic"><use href="#lotus"/></svg><span data-i="brand">हरे कृष्ण</span></div>
+  <div><p class="lead a" style="--d:.15s" data-i="lead"></p><h1 class="a" style="--d:.3s" data-h="h1"></h1></div>
+  <div style="width:100%">
+    <div class="facts">
+      <div class="fact a" style="--d:.5s"><svg class="ic"><use href="#cal"/></svg><div><b data-i="fDateB"></b><small data-i="fDateS"></small></div></div>
+      <div class="fact a" style="--d:.65s"><svg class="ic"><use href="#clock"/></svg><div><b data-i="fTimeB"></b><small data-i="fTimeS"></small></div></div>
+      <div class="fact a" style="--d:.8s"><svg class="ic"><use href="#pin"/></svg><div><b data-i="fPlaceB"></b><small data-i="fPlaceS"></small></div></div>
+    </div>
+    <div class="cta a" style="--d:1s"><button class="btn gold" onclick="go('invite')"><svg class="ic f"><use href="#lotus"/></svg><span data-i="cta"></span></button></div>
+    <p class="quote a" style="--d:1.15s" data-i="quote"></p>
+  </div>
+</section>
+
+<main>
+<section class="card today hidden" id="today">
+  <h2><svg class="ic"><use href="#flame"/></svg><span data-i="todayH"></span></h2>
+  <p style="margin-bottom:14px" data-i="todayP"></p>
+  <div class="two"><a class="btn gold" data-t="map" href="https://www.google.com/maps/dir/?api=1&destination=ISKCON+Pune+Camp+Sri+Radha+Kunjbihari+Mandir" target="_blank" rel="noopener"><svg class="ic"><use href="#nav"/></svg><span data-i="dock1"></span></a><a class="btn ghost hidden" id="tcall"><svg class="ic"><use href="#phone"/></svg><span data-i="callHelp"></span></a></div>
+</section>
+
+<section class="card center" id="invite">
+  <p style="font-weight:700;color:var(--deep)" data-i="dand"></p>
+  <h2 class="hi" id="who" style="display:block;border:0;padding:0;margin-bottom:8px"></h2>
+  <p data-i="inv"></p>
+  <div class="guru">
+    <div class="ph"><img src="guru.jpeg" alt="Lokanath Swami Maharaj" onerror="this.parentNode.style.display='none'"></div>
+    <div><b data-i="guruName"></b><span data-i="guruSub"></span></div>
+  </div>
+  <p id="cd-h" style="font-weight:700;color:var(--ink)" data-i="cdH"></p>
+  <div class="cd" id="cd"><div><b id="d">--</b><small data-i="uD"></small></div><div><b id="h">--</b><small data-i="uH"></small></div><div><b id="m">--</b><small data-i="uM"></small></div><div><b id="s">--</b><small data-i="uS"></small></div></div>
+  <div class="live hidden" id="live"></div>
+</section>
+
+<section class="card">
+  <h2><svg class="ic"><use href="#clock"/></svg><span data-i="schH"></span></h2>
+  <ul class="tl">
+    <li><span class="dot"><svg class="ic"><use href="#flame"/></svg></span><div><b data-i="s1b"></b><p data-i="s1p"></p></div></li>
+    <li><span class="dot"><svg class="ic"><use href="#bell"/></svg></span><div><b data-i="s2b"></b><p data-i="s2p"></p></div></li>
+    <li><span class="dot"><svg class="ic"><use href="#beads"/></svg></span><div><b data-i="s3b"></b><p data-i="s3p"></p></div></li>
+    <li><span class="dot"><svg class="ic"><use href="#gift"/></svg></span><div><b data-i="s4b"></b><p data-i="s4p"></p></div></li>
+  </ul>
+  <h3 style="font-size:22px;margin:8px 0 12px" data-i="rulesH"></h3>
+  <ul class="rules">
+    <li class="must"><svg class="ic"><use href="#star"/></svg><span><span data-i="r1"></span><em class="tag" data-i="tagMust"></em></span></li>
+    <li class="must"><svg class="ic"><use href="#beads"/></svg><span><span data-i="r2"></span><em class="tag" data-i="tagMust"></em></span></li>
+    <li class="must"><svg class="ic"><use href="#star"/></svg><span><span data-i="r3"></span><em class="tag" data-i="tagMust"></em></span></li>
+    <li class="must pm"><svg class="ic"><use href="#star"/></svg><span><span data-i="r4"></span><em class="tag" data-i="tagMand"></em></span></li>
+    <li><svg class="ic"><use href="#info"/></svg><span data-i="r5"></span></li>
+    <li><svg class="ic"><use href="#info"/></svg><span data-i="r6"></span></li>
+    <li><svg class="ic"><use href="#info"/></svg><span data-i="r7"></span></li>
+  </ul>
+</section>
+
+<section class="card center" id="venue">
+  <h2><svg class="ic"><use href="#pin"/></svg><span data-i="venueH"></span></h2>
+  <div class="venue"><img src="venue.png" alt="Sri Radha Kunjabihari Mandir" onerror="this.parentNode.style.display='none'"></div>
+  <h3 style="font-size:24px" data-i="fPlaceB"></h3>
+  <p class="addr"><svg class="ic"><use href="#pin"/></svg><span style="text-align:center" data-i="addr"></span></p>
+  <div class="stack">
+    <a class="btn gold" data-t="map" href="https://www.google.com/maps/dir/?api=1&destination=ISKCON+Pune+Camp+Sri+Radha+Kunjbihari+Mandir" target="_blank" rel="noopener"><svg class="ic"><use href="#nav"/></svg><span data-i="route"></span></a>
+    <button class="btn ghost" onclick="openCal()"><svg class="ic"><use href="#cal"/></svg><span data-i="addCal"></span></button>
+  </div>
+  <div class="map"><iframe loading="lazy" title="Map" src="https://www.google.com/maps?q=ISKCON+Pune+Camp+Sri+Radha+Kunjbihari+Mandir&output=embed"></iframe></div>
+</section>
+
+<section class="card">
+  <h2 style="justify-content:center"><svg class="ic"><use href="#check"/></svg><span data-i="prepH"></span></h2>
+  <p class="center" style="margin:-4px 0 14px" data-i="prepSub"></p>
+  <div id="list"></div><div class="bar"><span id="bar"></span></div><p class="stat" id="stat"></p>
+  <button class="btn gold" id="ready"><svg class="ic f"><use href="#lotus"/></svg><span id="ready-t"></span></button>
+</section>
+
+<section class="card">
+  <h2><svg class="ic"><use href="#chat"/></svg><span data-i="helpH"></span></h2>
+  <p style="margin-bottom:12px" data-i="helpP"></p>
+  <div class="stack"><textarea id="mt" rows="3" maxlength="400" data-p="mph" data-a="mph"></textarea>
+  <button class="btn gold" onclick="sendMsg()"><svg class="ic"><use href="#chat"/></svg><span data-i="send"></span></button>
+  <div class="two hidden" id="hl"><a class="btn ghost hidden" id="hcall"><svg class="ic"><use href="#phone"/></svg><span data-i="callShort"></span></a><a class="btn green hidden" id="hwa" target="_blank" rel="noopener"><svg class="ic"><use href="#chat"/></svg><span>WhatsApp</span></a></div></div>
+</section>
+
+<section class="card center">
+  <h2><svg class="ic"><use href="#share"/></svg><span data-i="shareH"></span></h2>
+  <p style="margin-bottom:16px" data-i="shareP"></p>
+  <div class="stack">
+    <button class="btn green" onclick="wa()"><svg class="ic"><use href="#chat"/></svg><span data-i="waBtn"></span></button>
+    <div class="two"><button class="btn ghost" onclick="copyLink()"><svg class="ic"><use href="#link"/></svg><span data-i="copyBtn"></span></button><button class="btn ghost" onclick="nativeShare()"><svg class="ic"><use href="#share"/></svg><span data-i="moreBtn"></span></button></div>
+  </div>
+  <form class="sub" onsubmit="refer(event)">
+    <h3 data-i="refH"></h3>
+    <div class="stack"><input id="rn" type="text" data-p="refName" required autocomplete="off" data-a="refName"><input id="rp" type="tel" inputmode="numeric" data-p="refPhone" data-a="refPhone">
+    <button class="btn gold" type="submit"><svg class="ic"><use href="#chat"/></svg><span data-i="refBtn"></span></button></div>
+  </form>
+</section>
+
+<section class="card">
+  <h2><svg class="ic"><use href="#lotus"/></svg><span data-i="ytH"></span></h2>
+  <p data-i="ytP"></p>
+  <div class="vid"><img src="radha-krishna.png" alt="" onerror="this.src='https://img.youtube.com/vi/6Zh9HzBA9jo/hqdefault.jpg'"><button data-t="video" data-a="play" onclick="openVid('6Zh9HzBA9jo')"><svg class="ic f"><use href="#play"/></svg></button></div>
+  <a class="btn red" data-t="yt" href="https://www.youtube.com/@VedaLeelaStudio" target="_blank" rel="noopener"><svg class="ic f"><use href="#play"/></svg><span data-i="ytBtn"></span></a>
+</section>
+
+<section class="card">
+  <h2><svg class="ic"><use href="#star"/></svg><span data-i="galH"></span></h2>
+  <div class="gal"><img src="gallery-1.png" alt="" loading="lazy" onerror="this.remove()"><img src="gallery-2.png" alt="" loading="lazy" onerror="this.remove()"><img src="gallery-3.png" alt="" loading="lazy" onerror="this.remove()"><img src="gallery-4.png" alt="" loading="lazy" onerror="this.remove()"></div>
+</section>
+
+<section class="card mantra">हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे<br>हरे राम हरे राम राम राम हरे हरे</section>
+<footer><span data-i="foot1"></span><br><span data-i="foot2"></span><small><span data-i="foot3"></span> <a href="https://www.youtube.com/@VedaLeelaStudio" target="_blank" rel="noopener" style="text-decoration:underline">VedaLeela Studio</a></small></footer>
+</main>
+
+<nav class="dock">
+  <a data-t="map" href="https://www.google.com/maps/dir/?api=1&destination=ISKCON+Pune+Camp+Sri+Radha+Kunjbihari+Mandir" target="_blank" rel="noopener"><svg class="ic"><use href="#pin"/></svg><span data-i="dock1"></span></a>
+  <button class="main" onclick="openCal()"><svg class="ic"><use href="#cal"/></svg><span data-i="dock2"></span></button>
+  <button onclick="nativeShare()"><svg class="ic"><use href="#share"/></svg><span data-i="dock3"></span></button>
+</nav>
+</div>
+
+<div class="ov" id="cal-ov" onclick="if(event.target===this)closeAll()"><div class="sheet" role="dialog">
+  <h3 data-i="calH"></h3><p style="margin-bottom:16px" data-i="calP"></p>
+  <div class="stack"><a class="btn gold" data-t="cal" id="gcal" target="_blank" rel="noopener"><svg class="ic"><use href="#cal"/></svg><span>Google Calendar (Android)</span></a>
+  <button class="btn ghost" onclick="dlIcs()"><svg class="ic"><use href="#cal"/></svg><span data-i="ics"></span></button>
+  <button class="btn ghost" onclick="closeAll()" data-i="close"></button></div>
+  <p style="font-size:15px;margin-top:14px" data-i="calNote"></p>
+</div></div>
+<div class="ov vm" id="vid-ov" onclick="if(event.target===this)closeAll()"><div class="box"><button class="x" onclick="closeAll()" data-a="close"><svg class="ic"><use href="#x"/></svg></button><iframe id="yt" title="YouTube" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div></div>
+
+<script>
+window.__ok=1;
+const START=new Date("2026-10-03T04:30:00+05:30").getTime(),END=new Date("2026-10-03T12:30:00+05:30").getTime();
+/* सेवा टीम का नंबर देश कोड के साथ, जैसे '919876543210'. खाली रहे तो बटन छिपे रहेंगे */
+const HELP={call:'',wa:''};
+const LS="diksha_checklist_v3",CLEAN=false;
+const q=new URLSearchParams(location.search);
+let L='hi',G='',ITEMS=[],phone='',db=null,token='',name='',nameEn='',done=[],ready=false,opened=false,explicit=false;
+const $=id=>document.getElementById(id);
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const g2=(m,f,mn,fn)=>G==='m'?m:G==='f'?f:m+'/'+f;
+const D={
+hi:{title:"श्री हरिनाम दीक्षा महोत्सव",introHi:"हरे कृष्ण",introTap:"दीया जलाकर निमंत्रण खोलें",skip:"छोड़ें",lampA:"दीया जलाएँ",offH:"हरे कृष्ण",offP:"यह निमंत्रण अभी सक्रिय नहीं है। कृपया आयोजन समिति से संपर्क करें।",
+brand:"हरे कृष्ण",lead:"परम पूज्य लोकनाथ स्वामी महाराज के सानिध्य में",h1:"श्री हरिनाम<br>दीक्षा महोत्सव",fDateB:"03 अक्टूबर 2026",fDateS:"शनिवार",fTimeB:"प्रातः 04:30 बजे",fTimeS:"मंगल आरती से शुरू",fPlaceB:"श्री राधा कुंजबिहारी मंदिर",fPlaceS:"कैंप, पुणे",cta:"पावन निमंत्रण खोलें",quote:"“हरिनाम ही जीवन का सार है”",
+todayH:"आज आपका दीक्षा दिवस है",todayP:"सुबह 04:30 बजे मंगल आरती में पहुँचें।",next:"अगला",nowT:"अभी",callHelp:"सेवा टीम को कॉल करें",callShort:"कॉल करें",
+dand:"दंडवत प्रणाम। श्रील प्रभुपाद की जय!",inv:"आपकी हरिनाम दीक्षा का पावन दिन निकट है। आपको सादर आमंत्रित किया जाता है।",guruName:"परम पूज्य लोकनाथ स्वामी महाराज",guruSub:"के करकमलों से आपकी हरिनाम दीक्षा",
+cdH:"समारोह शुरू होने में शेष समय",uD:"दिन",uH:"घंटे",uM:"मिनट",uS:"सेकंड",liveH:"समारोह चल रहा है",liveT:"आज है आपका पावन दीक्षा दिवस",doneH:"समारोह संपन्न हुआ",doneT:"हरे कृष्ण! आपका आभार",
+schH:"कार्यक्रम एवं समय",s1b:"04:30 AM",s1p:"सब भक्त मंगल आरती में उपस्थित रहें",s2b:"आरती के बाद",s2p:"ज़रूरी सूचनाएँ दी जाएँगी",s3b:"सूचनाओं के बाद",s3p:"अपनी 16 माला जप पूरी करें",s4b:"ठीक 07:00 AM",s4p:"दीक्षा किट वितरण। सबको बेल्ट मिलेगा।",
+rulesH:"कृपया ध्यान दें",r1:"दीक्षा के दिन नए जोड़े कपड़े (वैष्णव वेश) पहनें।",r2:"दीक्षा से पहले अपनी 16 जप माला पूरी करें।",r3:"यज्ञ की समाप्ति तक व्रत (उपवास) रखें।",r4:"प्रभुजी को शिर मुंडन कराना है और शिखा रखनी है।",r5:"बेल्ट नंबर के अनुसार अपना स्थान ग्रहण करें।",r6:"शांति बनाए रखें।",r7:"आयोजकों की सभी सूचनाओं का पालन करें।",tagMust:"ज़रूरी",tagMand:"अनिवार्य",
+venueH:"समारोह स्थल",addr:"तारापोर रोड, दस्तूर बॉयज़ स्कूल के पास, कैंप, पुणे",route:"मुझे रास्ता दिखाएँ",addCal:"कैलेंडर में जोड़ें",
+prepH:"मेरी तैयारी",prepSub:"हर तैयारी पर टैप करके पुष्टि करें।",ready:"मैं दीक्षा के लिए तैयार हूँ",readyDone:"आपकी तैयारी दर्ज हो गई ✓",
+helpH:"कोई प्रश्न या समस्या?",helpP:"अपना संदेश लिखें, आयोजन सेवक आपसे संपर्क करेंगे।",mph:"यहाँ लिखें...",send:"संदेश भेजें",mEmpty:"पहले संदेश लिखें",mOk:"संदेश पहुँच गया। सेवक आपसे संपर्क करेंगे।",mFail:"संदेश नहीं भेजा जा सका",mWait:"अभी नहीं भेज सकते, थोड़ी देर बाद प्रयास करें",
+shareH:"निमंत्रण शेयर करें",shareP:"इस पावन निमंत्रण को किसी भक्त मित्र तक पहुँचाएँ।",waBtn:"WhatsApp पर भेजें",copyBtn:"लिंक कॉपी करें",moreBtn:"और विकल्प",copied:"लिंक कॉपी हो गया",
+refH:"किसी भक्त को सीधे आमंत्रित करें",refName:"भक्त का नाम",refPhone:"WhatsApp नंबर (10 अंक, वैकल्पिक)",refBtn:"निमंत्रण भेजें",refToast:"निमंत्रण तैयार है, WhatsApp में भेजें",
+ytH:"हरिनाम की महिमा",ytP:"हरिनाम और भगवान की लीलाओं की कथाएँ, VedaLeela Studio की विनम्र सेवा।",ytBtn:"और कथाएँ देखें",play:"वीडियो चलाएँ",galH:"पावन झलकियाँ",
+foot1:"हरिबोल! जय श्रील प्रभुपाद!",foot2:"आपके दासानुदास — आयोजन सेवक",foot3:"डिजिटल सेवा:",dock1:"रास्ता",dock2:"कैलेंडर",dock3:"शेयर",
+calH:"कैलेंडर में जोड़ें",calP:"3 अक्टूबर, सुबह 04:30। अपना फ़ोन चुनें:",ics:"iPhone / दूसरा कैलेंडर",close:"बंद करें",calNote:"iPhone पर फ़ाइल खुलने के बाद “जोड़ें” दबाएँ। एक दिन पहले और 2 घंटे पहले याद दिलाया जाएगा।",icsToast:"कैलेंडर फ़ाइल खोलकर “जोड़ें” दबाएँ",
+c1:"मैंने दीक्षा के लिए नए जोड़े कपड़े (वैष्णव वेश) तैयार कर लिए हैं",c2:()=>"मैं सुबह 4:30 बजे मंगल आरती में "+g2('पहुँचूँगा','पहुँचूँगी'),c3:()=>"मैं दीक्षा से पहले 16 माला जप पूरी "+g2('करूँगा','करूँगी'),c4:()=>"मैं यज्ञ की समाप्ति तक व्रत "+g2('रखूँगा','रखूँगी'),c5:"मैंने सभी निर्देश पढ़ लिए हैं",c6:()=>(G==='m'?'':'(प्रभुजी के लिए) ')+'मैं शिर मुंडन करवाऊँगा और शिखा रखूँगा',
+stat:(a,b)=>`${a} / ${b} तैयारियाँ पूरी`,left:n=>`अभी ${n} तैयारी बाकी है`,rdy:n=>`हरे कृष्ण ${n}! आपकी तैयारी दर्ज हो गई`,
+evT:"श्री हरिनाम दीक्षा महोत्सव",evD:"परम पूज्य लोकनाथ स्वामी महाराज के करकमलों से हरिनाम दीक्षा। सुबह 04:30 मंगल आरती में उपस्थित रहें। 16 माला जप पूरी करें। ठीक 7 बजे दीक्षा किट। नए वैष्णव वस्त्र और व्रत ज़रूरी।",evL:"श्री राधा कुंजबिहारी मंदिर, तारापोर रोड, कैंप, पुणे",
+shM:l=>`हरे कृष्ण! दंडवत प्रणाम 🙏\n\nआपको *श्री हरिनाम दीक्षा महोत्सव* में सादर आमंत्रित किया जाता है।\n\n📅 03 अक्टूबर 2026, सुबह 04:30\n📍 श्री राधा कुंजबिहारी मंदिर, कैंप, पुणे\n\nनिमंत्रण देखें:\n${l}`,rfM:(n,l)=>`हरे कृष्ण ${n} जी! 🙏\n\nआपको *श्री हरिनाम दीक्षा महोत्सव* का पावन निमंत्रण भेजा जा रहा है:\n${l}`,shT:"हरे कृष्ण! पावन निमंत्रण:"},
+en:{title:"Sri Harinam Diksha Mahotsav",introHi:"Hare Krishna",introTap:"Light the lamp to open your invitation",skip:"Skip",lampA:"Light the lamp",offH:"Hare Krishna",offP:"This invitation is not active right now. Please contact the organizing committee.",
+brand:"Hare Krishna",lead:"In the divine presence of His Holiness Lokanath Swami Maharaj",h1:"Sri Harinam<br>Diksha Mahotsav",fDateB:"3 October 2026",fDateS:"Saturday",fTimeB:"4:30 AM",fTimeS:"Begins with Mangal Aarti",fPlaceB:"Sri Radha Kunjabihari Mandir",fPlaceS:"Camp, Pune",cta:"Open your invitation",quote:"“The Holy Name is the essence of life.”",
+todayH:"Today is your Diksha day",todayP:"Please be at Mangal Aarti at 4:30 AM.",next:"Next",nowT:"Now",callHelp:"Call the seva team",callShort:"Call",
+dand:"Dandavat pranams. All glories to Srila Prabhupada!",inv:"The auspicious day of your Harinam initiation is near. You are warmly invited.",guruName:"His Holiness Lokanath Swami Maharaj",guruSub:"will bestow your Harinam initiation",
+cdH:"Time remaining until the ceremony",uD:"Days",uH:"Hours",uM:"Minutes",uS:"Seconds",liveH:"The ceremony is underway",liveT:"Today is your sacred Diksha day",doneH:"The ceremony has concluded",doneT:"Hare Krishna! Thank you.",
+schH:"Schedule",s1b:"4:30 AM",s1p:"All devotees please attend Mangal Aarti",s2b:"After the aarti",s2p:"Important announcements will be made",s3b:"After the announcements",s3p:"Complete your 16 rounds of japa",s4b:"Sharp at 7:00 AM",s4p:"Diksha kit distribution. Everyone will receive a belt.",
+rulesH:"Please note",r1:"On the day of initiation, wear a new set of clothes (Vaishnava dress).",r2:"Complete your 16 rounds of japa before initiation.",r3:"Observe a fast until the yagya concludes.",r4:"Prabhujis must shave their heads and keep a shikha.",r5:"Take your seat according to your belt number.",r6:"Please maintain silence and peace.",r7:"Follow all instructions from the organizers.",tagMust:"Required",tagMand:"Mandatory",
+venueH:"Venue",addr:"Tarapore Road, near Dastur Boys' School, Camp, Pune",route:"Get directions",addCal:"Add to calendar",
+prepH:"My preparation",prepSub:"Tap each item to confirm.",ready:"I am ready for initiation",readyDone:"Your preparation is recorded ✓",
+helpH:"Questions or need help?",helpP:"Write to us and a seva team member will contact you.",mph:"Type here...",send:"Send message",mEmpty:"Please write a message first",mOk:"Message received. We will contact you.",mFail:"Could not send the message",mWait:"Cannot send right now. Please try again shortly.",
+shareH:"Share this invitation",shareP:"Pass this sacred invitation to a devotee friend.",waBtn:"Send on WhatsApp",copyBtn:"Copy link",moreBtn:"More options",copied:"Link copied",
+refH:"Invite a devotee directly",refName:"Devotee's name",refPhone:"WhatsApp number (10 digits, optional)",refBtn:"Send invitation",refToast:"Invitation ready. Send it in WhatsApp.",
+ytH:"The glory of Harinam",ytP:"Stories of the Holy Name and the Lord's pastimes, a humble service by VedaLeela Studio.",ytBtn:"Watch more stories",play:"Play video",galH:"Sacred glimpses",
+foot1:"Haribol! All glories to Srila Prabhupada!",foot2:"Your servants, the seva team",foot3:"Digital seva by",dock1:"Route",dock2:"Calendar",dock3:"Share",
+calH:"Add to calendar",calP:"3 October, 4:30 AM. Choose your phone:",ics:"iPhone / other calendar",close:"Close",calNote:"On iPhone, tap “Add” once the file opens. You will be reminded one day and two hours before.",icsToast:"Open the calendar file and tap “Add”",
+c1:"I have prepared a new set of Vaishnava clothes for initiation",c2:"I will be at Mangal Aarti by 4:30 AM",c3:"I will complete 16 rounds of japa before initiation",c4:"I will fast until the yagya concludes",c5:"I have read all the instructions",c6:()=>(G==='m'?'':'(For Prabhujis) ')+"I will shave my head and keep a shikha",
+stat:(a,b)=>`${a} of ${b} completed`,left:n=>`${n} item${n>1?'s':''} still to confirm`,rdy:n=>`Hare Krishna${n?' '+n:''}! Your preparation is recorded`,
+evT:"Sri Harinam Diksha Mahotsav",evD:"Harinam initiation from His Holiness Lokanath Swami Maharaj. Attend Mangal Aarti at 4:30 AM. Complete 16 rounds of japa. Diksha kit at 7:00 AM sharp. New Vaishnava clothes and a fast are required.",evL:"Sri Radha Kunjabihari Mandir, Tarapore Road, Camp, Pune",
+shM:l=>`Hare Krishna! Dandavat pranams 🙏\n\nYou are warmly invited to the *Sri Harinam Diksha Mahotsav*.\n\n📅 3 October 2026, 4:30 AM\n📍 Sri Radha Kunjabihari Mandir, Camp, Pune\n\nView the invitation:\n${l}`,rfM:(n,l)=>`Hare Krishna ${n}! 🙏\n\nYou are invited to the *Sri Harinam Diksha Mahotsav*:\n${l}`,shT:"Hare Krishna! Your sacred invitation:"}
+};
+const t=(k,...a)=>{const v=D[L][k];return typeof v==='function'?v(...a):v};
+const hasDev=s=>/[\u0900-\u097F]/.test(s||'');
+const nm=()=>L==='en'?(nameEn||(hasDev(name)?'':name)):name;
+const salW=()=>L==='en'?(G==='m'?'Prabhuji':G==='f'?'Mataji':''):(G==='m'?'प्रभुजी':G==='f'?'माताजी':'जी');
+function dear(){const n=nm();return L==='hi'?`प्रिय ${n||'दीक्षार्थी भक्त'} ${salW()},`:'Dear '+((n+' '+salW()).trim()||'Devotee')+','}
+function introName(){const n=nm();return L==='hi'?((n?n+' ':'')+(G?salW():'')).trim():((n?n+' ':'')+salW()).trim()}
+
+function toast(m){const e=$('toast');$('toast-t').textContent=m;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2800)}
+function go(id){$(id).scrollIntoView({behavior:'smooth'})}
+function closeAll(){$('cal-ov').classList.remove('show');$('vid-ov').classList.remove('show');$('yt').src=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+function applyLang(){
+  document.documentElement.lang=L;document.title=t('title');
+  document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
+  document.querySelectorAll('[data-h]').forEach(e=>e.innerHTML=t(e.dataset.h));
+  document.querySelectorAll('[data-p]').forEach(e=>e.placeholder=t(e.dataset.p));
+  document.querySelectorAll('[data-a]').forEach(e=>e.setAttribute('aria-label',t(e.dataset.a)));
+  document.querySelectorAll('.lg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.l===L)));
+  $('who').textContent=dear();const iN=$('iname');if(iN)iN.textContent=introName();
+  applyG('');tick(true);dayMode();helpUI();
+}
+function setLang(l){L=l;explicit=true;store.set('diksha_lang',l);applyLang()}
+
+/* Intro */
+function openIntro(){
+  if(opened||!$('intro'))return;opened=true;const i=$('intro');i.classList.add('lit');store.set('diksha_intro','1');
+  setTimeout(()=>i.classList.add('go'),950);setTimeout(()=>document.body.classList.add('play'),1150);setTimeout(()=>i.remove(),2400);
+}
+/* Countdown */
+let lastS='';
+function tick(f){
+  const now=Date.now(),diff=START-now,p=n=>String(n).padStart(2,'0');
+  if(diff<=0){$('cd').classList.add('hidden');$('live').classList.remove('hidden');const on=now<END;$('cd-h').textContent=t(on?'liveH':'doneH');$('live').textContent=t(on?'liveT':'doneT');return}
+  $('cd').classList.remove('hidden');$('live').classList.add('hidden');$('cd-h').textContent=t('cdH');
+  $('d').textContent=p(Math.floor(diff/864e5));$('h').textContent=p(Math.floor(diff%864e5/36e5));$('m').textContent=p(Math.floor(diff%36e5/6e4));
+  const s=p(Math.floor(diff%6e4/1e3));if(s!==lastS&&!f){const e=$('s');e.classList.remove('tk');void e.offsetWidth;e.classList.add('tk')}lastS=s;$('s').textContent=s;
+}
+/* Event-day mode */
+function dayMode(){
+  const n=Date.now(),on=q.get('today')==='1'||(n>START-12*36e5&&n<END);$('today').classList.toggle('hidden',!on);
+  const li=document.querySelectorAll('.tl li');li.forEach(e=>{e.classList.remove('now');const o=e.querySelector('.nt');if(o)o.remove()});
+  if(!on)return;const m=(n-START)/6e4,idx=m<0?[0]:m<150?[1,2]:[3];
+  idx.forEach(i=>{li[i].classList.add('now');const s=document.createElement('em');s.className='tag nt';s.textContent=t(m<0?'next':'nowT');li[i].querySelector('b').appendChild(s)});
+}
+function helpUI(){
+  const c=HELP.call,w=HELP.wa;$('hl').classList.toggle('hidden',!(c||w));
+  [['hcall',c,'tel:+'],['tcall',c,'tel:+']].forEach(([id,v,p])=>{$(id).classList.toggle('hidden',!v);if(v)$(id).href=p+v});
+  $('hwa').classList.toggle('hidden',!w);if(w)$('hwa').href='https://wa.me/'+w;
+}
+/* Gender + checklist */
+function applyG(v){
+  v=String(v||'').toLowerCase().trim();
+  G=/^(f|mataji|mahila|माता|महिला)/.test(v)?'f':/^(m|p|prabhu|प्रभु|पुरुष)/.test(v)?'m':G;
+  document.body.classList.toggle('f',G==='f');
+  ITEMS=['c1','c2','c3','c4','c5'].map(k=>t(k));if(G!=='f')ITEMS.push(t('c6'));
+  render();
+}
+function render(){
+  $('list').innerHTML=ITEMS.map((x,i)=>`<button class="chk ${done.includes(i)?'on':''}" role="checkbox" aria-checked="${done.includes(i)}" onclick="toggle(${i})"><i><svg class="ic"><use href="#check"/></svg></i><span>${x}</span></button>`).join('');
+  $('stat').textContent=t('stat',done.length,ITEMS.length);$('bar').style.width=done.length/ITEMS.length*100+'%';
+  $('ready-t').textContent=ready?t('readyDone'):t('ready');$('ready').classList.toggle('green',ready);$('ready').classList.toggle('gold',!ready);
+}
+function toggle(i){done=done.includes(i)?done.filter(x=>x!==i):[...done,i];ready=false;save();render()}
+function save(){store.set(LS,JSON.stringify({done,ready}));if(db&&token)db.collection('participants').doc(token).update({checklist:done,checklistTotal:ITEMS.length,ready:ready,lastSeen:firebase.firestore.FieldValue.serverTimestamp(),lastEvent:'checklist'}).catch(()=>{})}
+function petals(){
+  const C=['#f4b6cb','#e88fb0','#f6d98b','#fff1c9'];
+  for(let i=0;i<30;i++){const e=document.createElement('i');e.className='pt';e.style.cssText=`left:${Math.random()*100}%;background:${C[i%4]};animation-duration:${2.6+Math.random()*2.4}s;animation-delay:${Math.random()*.9}s;transform:scale(${.7+Math.random()*.8})`;document.body.appendChild(e);setTimeout(()=>e.remove(),6500)}
+}
+$('ready').onclick=()=>{
+  if(done.length<ITEMS.length){const b=$('ready');b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');toast(t('left',ITEMS.length-done.length));return}
+  ready=true;save();render();petals();toast(t('rdy',nm()?nm()+' '+salW():salW()));
+  if(db&&token)db.collection('participants').doc(token).update({ready:true,readyAt:firebase.firestore.FieldValue.serverTimestamp(),lastSeen:firebase.firestore.FieldValue.serverTimestamp(),lastEvent:'ready','clicks.ready':firebase.firestore.FieldValue.increment(1)}).catch(()=>{});
+};
+/* Calendar */
+function ev(){return {title:t('evT'),desc:t('evD'),loc:t('evL'),s:"20261002T230000Z",e:"20261003T070000Z"}}
+function openCal(){const E=ev();$('gcal').href="https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(E.title)+"&dates="+E.s+"/"+E.e+"&details="+encodeURIComponent(E.desc)+"&location="+encodeURIComponent(E.loc);$('cal-ov').classList.add('show')}
+function dlIcs(){
+  track('cal');const E=ev(),x=v=>v.replace(/[,;]/g,'\\$&'),a=(x,d)=>["BEGIN:VALARM","TRIGGER:"+x,"ACTION:DISPLAY","DESCRIPTION:"+d,"END:VALARM"];
+  const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Diksha//EN","BEGIN:VEVENT","UID:diksha-2026-10-03@invite","DTSTAMP:20261001T000000Z","DTSTART:"+E.s,"DTEND:"+E.e,"SUMMARY:"+x(E.title),"DESCRIPTION:"+x(E.desc),"LOCATION:"+x(E.loc),...a("-P1D",E.title),...a("-PT2H",E.title),"END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const u=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'})),l=document.createElement('a');l.href=u;l.download='harinam-diksha.ics';document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),3000);closeAll();toast(t('icsToast'));
+}
+/* Share + tracking */
+function link(){const b=document.baseURI,en=L==='en';return token?(CLEAN?b+'i/'+token+(en?'?l=en':''):b+'?t='+token+(en?'&l=en':'')):b+(en?'?l=en':'')}
+function track(k){if(!(db&&token))return;const V=firebase.firestore.FieldValue,u={lastSeen:V.serverTimestamp(),lastEvent:k};u['clicks.'+k]=V.increment(1);if(k==='shares')u.shares=V.increment(1);db.collection('participants').doc(token).update(u).catch(()=>{})}
+document.addEventListener('click',e=>{const x=e.target.closest('[data-t]');if(x)track(x.dataset.t)});
+function wa(ph,msg){msg=msg||t('shM',link());let p=(ph||'').replace(/\D/g,'');if(p.length===10)p='91'+p;window.open('https://api.whatsapp.com/send?'+(p?'phone='+p+'&':'')+'text='+encodeURIComponent(msg),'_blank');track('shares')}
+function copyLink(){const x=link();(navigator.clipboard?navigator.clipboard.writeText(x):Promise.reject()).catch(()=>{const i=document.createElement('input');i.value=x;document.body.appendChild(i);i.select();document.execCommand('copy');i.remove()}).finally(()=>{toast(t('copied'));track('shares')})}
+async function nativeShare(){if(navigator.share){try{await navigator.share({title:t('title'),text:t('shT'),url:link()});track('shares')}catch(e){}}else copyLink()}
+function refer(e){e.preventDefault();const n=$('rn').value.trim(),p=$('rp').value.trim();if(!n)return;wa(p,t('rfM',n,link()));if(db)db.collection('referrals').add({from:token||null,name:n,at:firebase.firestore.FieldValue.serverTimestamp()}).catch(()=>{});$('rn').value='';$('rp').value='';track('referral');toast(t('refToast'))}
+function openVid(id){$('yt').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0';$('vid-ov').classList.add('show')}
+function sendMsg(){
+  const x=$('mt').value.trim();if(!x)return toast(t('mEmpty'));if(!db)return toast(t('mWait'));
+  db.collection('messages').add({pid:token||null,name:name||'',phone:phone,text:x.slice(0,400),status:'new',at:firebase.firestore.FieldValue.serverTimestamp()}).then(()=>{$('mt').value='';toast(t('mOk'));track('msg')}).catch(()=>toast(t('mFail')));
+}
+function sparks(){const h=document.querySelector('.sp');for(let i=0;i<14;i++){const s=document.createElement('i'),z=2+Math.random()*4;s.style.cssText=`left:${Math.random()*100}%;width:${z}px;height:${z}px;animation-duration:${9+Math.random()*9}s;animation-delay:${-Math.random()*12}s`;h.appendChild(s)}}
+
+/* Init */
+window.addEventListener('DOMContentLoaded',async()=>{
+  const ql=q.get('l'),sl=store.get('diksha_lang');
+  if(ql==='en'||ql==='hi'){L=ql;explicit=true}else if(sl){L=sl;explicit=true}
+  try{const s=JSON.parse(store.get(LS)||'{}');done=s.done||[];ready=!!s.ready}catch(e){}
+  if(q.get('name'))name=q.get('name').trim();
+  G='';applyG(q.get('g')||'');applyLang();
+  setInterval(tick,1000);setInterval(dayMode,60000);sparks();
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});document.querySelectorAll('main>section,footer').forEach(e=>{e.classList.add('rv');io.observe(e)})}
+  if(store.get('diksha_intro')&&q.get('intro')!=='1'){$('intro').remove();document.body.classList.add('play')}
+  else{$('lamp').onclick=openIntro;setTimeout(openIntro,14000)}
+  if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+  try{
+    const parts=location.pathname.split('/'),i=parts.indexOf('i');
+    token=(i>-1&&parts[i+1]||q.get('t')||q.get('token')||q.get('id')||'').trim();
+    if(window.firebase){
+      firebase.initializeApp({apiKey:"AIzaSyASMDZyfcAjg5Nb1GAwQqkufvAdqZfy2us",authDomain:"diksha-invitation.firebaseapp.com",projectId:"diksha-invitation",storageBucket:"diksha-invitation.firebasestorage.app",messagingSenderId:"720673907233",appId:"1:720673907233:web:6a3e5a0fd49012e1177960"});
+      db=firebase.firestore();
+      if(token){
+        const ref=db.collection('participants').doc(token);
+        const snap=await Promise.race([ref.get(),new Promise((_,r)=>setTimeout(r,4000))]);
+        if(snap.exists){
+          const d=snap.data();
+          if(d.active===false){$('app').classList.add('hidden');$('off').classList.remove('hidden');$('intro')&&$('intro').remove()}
+          else{
+            if(d.name)name=d.name;nameEn=d.nameEn||'';phone=d.phone||'';
+            if(!explicit&&(d.lang==='en'||d.lang==='hi'))L=d.lang;
+            if(d.gender)applyG(d.gender);
+            if(Array.isArray(d.checklist)&&!done.length){done=d.checklist}
+            if(d.ready&&!ready)ready=true;
+            const V=firebase.firestore.FieldValue,u={opens:V.increment(1),lastSeen:V.serverTimestamp(),lastEvent:'open',device:/Mobi|Android|iPhone/i.test(navigator.userAgent)?'mobile':'desktop'};
+            if(!d.firstOpen)u.firstOpen=V.serverTimestamp();ref.update(u).catch(()=>{});
+          }
+        }
+      }
+    }
+  }catch(e){}
+  applyLang();
+});
+</script>
+</body>
+</html>
