@@ -1,26 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "iskconhadapsar.online"
-        }
-      ],
-      "destination": "/temple/index.html"
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.iskconhadapsar.online"
-        }
-      ],
-      "destination": "/temple/index.html"
-    },
-    {
       "source": "/admin",
       "destination": "/admin.html"
     },
@@ -71,6 +51,22 @@
     {
       "source": "/temple/prabhupada-prasad/",
       "destination": "/temple/prabhupada-prasad/index.html"
+    },
+    {
+      "source": "/temple/about",
+      "destination": "/temple/about/index.html"
+    },
+    {
+      "source": "/temple/about/",
+      "destination": "/temple/about/index.html"
+    },
+    {
+      "source": "/temple/contact",
+      "destination": "/temple/contact/index.html"
+    },
+    {
+      "source": "/temple/contact/",
+      "destination": "/temple/contact/index.html"
     },
     {
       "source": "/(.*)",

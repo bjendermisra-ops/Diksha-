@@ -1,0 +1,1 @@
+The independently hosted temple pages use local repository SVG artwork in temple/assets and existing root images hero-bg.png. Richer photographic asset pack with 33 optimized files was generated separately; this repository uses local fallback artwork until photographic files are uploaded. Generated art is illustrative; replace with verified ISKCON Hadapsar photos where needed.

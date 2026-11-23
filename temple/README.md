@@ -1,26 +1,25 @@
-# ISKCON Hadapsar temple website
-This directory hosts a **new responsive recreation** of the publicly accessible ISKCON Hadapsar temple website alongside (not in place of) the existing Harinam Diksha invitation. 
+# ISKCON Hadapsar — Independent public temple pages
 
-## Where it is served
-- Public temple homepage: https://iskconhadapsar.online/ (host-specific Vercel rewrite)
-- All pages: https://iskconhadapsar.online/temple/
-- Original Diksha invitation: https://diksha.toolgi.online/
-- Temple section from invitation footer: `/temple/`
+This folder contains a new static, mobile-responsive version of the publicly visible ISKCON Hadapsar website, built into the existing `IskconHadapsar` repository without replacing or altering the app's existing feature pages.
 
-## Implemented public pages
-- `/temple/` — Home, about, activities and gallery
-- `/temple/katha25/` — Bhagavat Katha and 2025 festival archive
-- `/temple/gita-mahayagna/` — Bhagavad Gita activities
-- `/temple/dc/` — Drawing Competition archive
-- `/temple/dindi/` — Wari, Dindi and service
-- `/temple/prabhupada-prasad/` — Prasadam distribution
+## Pages
+- `/temple/` — temple homepage
+- `/temple/katha25/` — Bhagavat Katha, with Dec 2025 festival marked as archived
+- `/temple/gita-mahayagna/` — Gita programs
+- `/temple/dc/` — 2025 Drawing Competition archive
+- `/temple/dindi/` — Dindi and Wari service
+- `/temple/prabhupada-prasad/` — prasadam service
 
-## Images and styles
-- Shared stylesheet: `temple.css`, scoped to temple pages, with responsive layouts
-- Shared mobile-nav script: `temple.js`
-- Committed image assets: `assets/brand.svg`, `assets/krishna.webp`, `assets/krishna-child.webp`, `assets/iskcon-artwork.webp`, `assets/flute-cover.webp`, `assets/bells-cover.webp`
-- Reuses existing repository images `/guru.jpeg`, `/gallery-2.png`, `/gallery-3.png` and `/gallery-4.png`, without modifying them.
+All pages are standard HTML/CSS/vanilla JS; no database or old Hostinger credentials are required to serve them. The mobile app homepage links to this section.
 
-**Image provenance and scope:** Original photos from the old `iskconhadapsar.com` Hostinger website could not be automatically downloaded. The images included here are from existing, user-controlled GitHub projects and must not be assumed to depict each specific historical event. The website does not rely on the old site to render images or CSS, but the external donation portal remains an outbound service.
+## Asset and service independence
+- Layout, navigation, copy and styling are hosted in this repository and do not fetch HTML from `iskconhadapsar.com`.
+- The home content image is the repository's existing `/krishna.webp`.
+- The current temple logo is referenced from the official donation portal's static asset domain. For completely offline/self-contained operation, the temple should supply a locally owned logo file.
+- External donation link: `https://givehadapsar.iskconpunecamp.com/give?remark=Other+Seva`; donations are not processed by this static site.
+- Phone and email are displayed as published on the original website.
 
-This is **not a pixel-for-pixel copy** of the original theme or a recovery of private registrations and database. Past 2025 and early 2026 competitions are marked historical rather than presenting expired registration forms as active.
+## Important scope and cautions
+This is a **functional public-site recreation**, not a pixel-for-pixel extraction of the former developer's full original website. Original page-builder templates, private databases, form submissions, paid assets, admin access and backend workflows cannot be recovered from public pages alone. Current content is selectively rewritten and consolidated for readability. Where original forms refer to past dated events, registration is not presented as open.
+
+If the original `iskconhadapsar.com` domain is controlled by the former developer, its DNS cannot be moved without registrar/domain owner access. These pages can be published independently under the user's Vercel-connected project and the domain that user controls.
