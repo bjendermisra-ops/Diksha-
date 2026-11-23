@@ -1,6 +1,60 @@
 {
   "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/temple",
+      "destination": "/temple/index.html"
+    },
+    {
+      "source": "/temple/",
+      "destination": "/temple/index.html"
+    },
+    {
+      "source": "/temple/katha25",
+      "destination": "/temple/katha25/index.html"
+    },
+    {
+      "source": "/temple/katha25/",
+      "destination": "/temple/katha25/index.html"
+    },
+    {
+      "source": "/temple/gita-mahayagna",
+      "destination": "/temple/gita-mahayagna/index.html"
+    },
+    {
+      "source": "/temple/gita-mahayagna/",
+      "destination": "/temple/gita-mahayagna/index.html"
+    },
+    {
+      "source": "/temple/dc",
+      "destination": "/temple/dc/index.html"
+    },
+    {
+      "source": "/temple/dc/",
+      "destination": "/temple/dc/index.html"
+    },
+    {
+      "source": "/temple/dindi",
+      "destination": "/temple/dindi/index.html"
+    },
+    {
+      "source": "/temple/dindi/",
+      "destination": "/temple/dindi/index.html"
+    },
+    {
+      "source": "/temple/prabhupada-prasad",
+      "destination": "/temple/prabhupada-prasad/index.html"
+    },
+    {
+      "source": "/temple/prabhupada-prasad/",
+      "destination": "/temple/prabhupada-prasad/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
