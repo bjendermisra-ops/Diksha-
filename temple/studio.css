@@ -305,3 +305,10 @@ body.temple-site .brand strong{font-size:15px}
 @media(prefers-reduced-motion:reduce){
 *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+
+
+/* Quiet, purposeful animation without hiding content during load. */
+.motion-capable [data-animate]{transition:transform .55s cubic-bezier(.2,.75,.2,1),opacity .55s ease;will-change:transform,opacity}
+.motion-capable [data-animate]:not(.revealed){transform:translateY(11px);opacity:.92}
+.motion-capable [data-animate].revealed{transform:translateY(0);opacity:1;will-change:auto}
+@media(prefers-reduced-motion:reduce){.motion-capable [data-animate]{transform:none!important;opacity:1!important;will-change:auto!important}}
