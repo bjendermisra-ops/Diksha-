@@ -1,6 +1,26 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "iskconhadapsar.online"
+        }
+      ],
+      "destination": "/temple/index.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.iskconhadapsar.online"
+        }
+      ],
+      "destination": "/temple/index.html"
+    },
+    {
       "source": "/admin",
       "destination": "/admin.html"
     },
