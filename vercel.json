@@ -1,6 +1,26 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.iskconhadapsar.online"
+        }
+      ],
+      "destination": "/hadapsar-landing.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "iskconhadapsar.online"
+        }
+      ],
+      "destination": "/hadapsar-landing.html"
+    },
+    {
       "source": "/app",
       "destination": "/app/index.html"
     },
