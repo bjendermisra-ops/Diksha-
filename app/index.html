@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>श्री श्री राधाकृष्ण चंद्र मंदिर</title>
+    <meta name="theme-color" content="#050505">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background: radial-gradient(circle at center, #1a0c02 0%, #050505 100%);
+            color: #ffffff;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 24px;
+        }
+        .mandir-card {
+            background: rgba(22, 22, 28, 0.95);
+            border: 1.5px solid rgba(255, 153, 51, 0.35);
+            border-radius: 28px;
+            padding: 35px 24px;
+            max-width: 380px;
+            width: 100%;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 153, 51, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .chakra-spinner {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 153, 51, 0.2);
+            border-top: 4px solid #FF9933;
+            border-bottom: 4px solid #FFD700;
+            animation: spin 1s linear infinite;
+            margin-bottom: 22px;
+            box-shadow: 0 0 25px rgba(255, 153, 51, 0.4);
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h1 {
+            color: #FFD700;
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.92rem;
+            line-height: 1.5;
+            margin-bottom: 22px;
+        }
+        .maha-mantra {
+            font-size: 0.8rem;
+            color: #ffb74d;
+            font-weight: 700;
+            background: rgba(255, 153, 51, 0.08);
+            border: 1px solid rgba(255, 153, 51, 0.25);
+            padding: 10px 14px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+        .btn-action {
+            width: 100%;
+            background: linear-gradient(135deg, #FF9933, #E65100);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 18px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 8px 25px rgba(230, 81, 0, 0.4);
+            transition: transform 0.15s ease;
+            text-transform: uppercase;
+        }
+        .btn-action:active { transform: scale(0.96); }
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+            box-shadow: none;
+            margin-top: 12px;
+            font-size: 0.82rem;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mandir-card">
+        <div class="chakra-spinner"></div>
+        <h1>श्री श्री राधाकृष्ण चंद्र मंदिर</h1>
+        <p id="msg-status">मंदिर ऐप खोला जा रहा है...<br>कृपया प्रतीक्षा करें 🌸</p>
+
+        <div class="maha-mantra">
+            हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे ।<br>
+            हरे राम हरे राम राम राम हरे हरे ॥
+        </div>
+
+        <a id="btn-open-app" href="#" class="btn-action">🚀 ऐप खोलें / Open App</a>
+        <a id="btn-play-store" href="https://play.google.com/store/apps/details?id=com.iskcon.hadapsar.santosh.in" class="btn-action btn-secondary">📲 Play Store से डाउनलोड करें</a>
+    </div>
+
+    <script>
+        const PACKAGE_NAME = "com.iskcon.hadapsar.santosh.in";
+        const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=" + PACKAGE_NAME;
+
+        // 1. URL से पेज का नाम निकालें (जैसे: ?page=dono.html या ?page=global_jap.html)
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetPage = urlParams.get('page') || "";
+
+        // 2. Android Native Intent तैयार करें
+        // अगर ऐप फोन में है -> sriradha:// scheme से खुलेगी
+        // अगर ऐप नहीं है -> S.browser_fallback_url से सीधे Play Store पर जाएगी
+        const intentUri = `intent://open?page=${encodeURIComponent(targetPage)}#Intent;scheme=sriradha;package=${PACKAGE_NAME};S.browser_fallback_url=${encodeURIComponent(PLAY_STORE_URL)};end`;
+
+        const btnOpen = document.getElementById('btn-open-app');
+        const btnPlay = document.getElementById('btn-play-store');
+
+        btnOpen.href = intentUri;
+        btnPlay.href = PLAY_STORE_URL;
+
+        // 3. ऐप खोलने का ऑटोमैटिक प्रयास करें
+        let appOpened = false;
+        const startTime = Date.now();
+
+        window.location.href = intentUri;
+
+        // अगर ऐप खुल गई तो पेज बैकग्राउंड में चला जाएगा
+        window.addEventListener('pagehide', function() {
+            appOpened = true;
+        });
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) appOpened = true;
+        });
+
+        // 4. बैकअप टाइमर: अगर 1.6 सेकंड में ऐप नहीं खुली (मतलब ऐप फोन में नहीं है)
+        // तो सीधे Google Play Store पर भेज दो!
+        setTimeout(function() {
+            const elapsed = Date.now() - startTime;
+            if (!appOpened && elapsed < 3000) {
+                document.getElementById('msg-status').innerHTML = "ऐप नहीं मिला!<br>Play Store पर भेजा जा रहा है...";
+                window.location.href = PLAY_STORE_URL;
+            }
+        }, 1600);
+    </script>
+</body>
+</html>
