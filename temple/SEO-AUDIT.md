@@ -28,3 +28,6 @@ Search intent priorities, not measured volume or difficulty. Google Search Conso
 5. SEO owner: compare 28-day query impressions, clicks, CTR and positions; use real Search Console data for further linking.
 
 Stop generating pages solely for keyword variations. Keep one substantial page per intent. Reference: https://developers.google.com/search/docs/appearance/ai-features .
+
+## Primary domain consolidation (25 Nov 2026)
+Search Console property: sc-domain:iskconhadapsar.online. Homepage indexed; 1,106 impressions, 6 clicks, 0.54% CTR and 9.3 average position (22 Aug–22 Nov 2026). New temple/app/aarti/Ekadashi URLs unknown to Google at initial inspection. Canonicals and sitemap now point to https://www.iskconhadapsar.online; root included. Root CTA fixed from placeholder to supplied Play Store URL. Root guide hub links to relevant content. Twelve embedded image payloads externalized as independently cacheable assets; no visual replacement. Removed blanket fallback for unknown routes, retaining /i legacy route. No ranking guarantee. Monitor GSC after deployment.

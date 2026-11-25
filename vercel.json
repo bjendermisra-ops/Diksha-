@@ -125,7 +125,7 @@
       "destination": "/temple/bhagavad-gita-offline/index.html"
     },
     {
-      "source": "/(.*)",
+      "source": "/i/:path*",
       "destination": "/index.html"
     }
   ],
@@ -165,6 +165,19 @@
           "value": "noindex, nofollow"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "iskconhadapsar.online"
+        }
+      ],
+      "destination": "https://www.iskconhadapsar.online/:path*",
+      "permanent": true
     }
   ]
 }
