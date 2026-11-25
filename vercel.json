@@ -85,6 +85,46 @@
       "destination": "/temple/app/index.html"
     },
     {
+      "source": "/temple/aarti-timings",
+      "destination": "/temple/aarti-timings/index.html"
+    },
+    {
+      "source": "/temple/aarti-timings/",
+      "destination": "/temple/aarti-timings/index.html"
+    },
+    {
+      "source": "/temple/ekadashi-calendar",
+      "destination": "/temple/ekadashi-calendar/index.html"
+    },
+    {
+      "source": "/temple/ekadashi-calendar/",
+      "destination": "/temple/ekadashi-calendar/index.html"
+    },
+    {
+      "source": "/temple/hare-krishna-mantra",
+      "destination": "/temple/hare-krishna-mantra/index.html"
+    },
+    {
+      "source": "/temple/hare-krishna-mantra/",
+      "destination": "/temple/hare-krishna-mantra/index.html"
+    },
+    {
+      "source": "/temple/krishna-ringtones-wallpapers",
+      "destination": "/temple/krishna-ringtones-wallpapers/index.html"
+    },
+    {
+      "source": "/temple/krishna-ringtones-wallpapers/",
+      "destination": "/temple/krishna-ringtones-wallpapers/index.html"
+    },
+    {
+      "source": "/temple/bhagavad-gita-offline",
+      "destination": "/temple/bhagavad-gita-offline/index.html"
+    },
+    {
+      "source": "/temple/bhagavad-gita-offline/",
+      "destination": "/temple/bhagavad-gita-offline/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
